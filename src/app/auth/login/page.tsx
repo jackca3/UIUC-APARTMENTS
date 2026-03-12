@@ -1,34 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mail, ShieldCheck, User } from "lucide-react";
+import { signIn } from "@/lib/auth-store";
+import { useAuth } from "@/contexts/auth-context";
 
-export default function LoginPage() {
+function LoginContent() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const { refreshSession } = useAuth();
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate auth action
-        await new Promise((r) => setTimeout(r, 1000));
+        const result = await signIn(email, password, true);
         setLoading(false);
 
-        if (email.endsWith("@illinois.edu")) {
-            toast.success("Successfully logged in!");
-            router.push("/dashboard");
+        if (!result.ok) {
+            toast.error(result.error || "Login failed.");
+            return;
+        }
+
+        refreshSession();
+        toast.success("Successfully logged in!");
+        
+        const redirect = searchParams?.get("redirect");
+        if (redirect) {
+            router.push(redirect);
         } else {
-            toast.error("Please use a valid @illinois.edu email address.");
+            router.push("/dashboard");
         }
     };
 
@@ -92,5 +103,13 @@ export default function LoginPage() {
                 </form>
             </Card>
         </div>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={<div className="container mx-auto px-4 py-20 min-h-[70vh] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-uiuc-navy" /></div>}>
+            <LoginContent />
+        </Suspense>
     );
 }

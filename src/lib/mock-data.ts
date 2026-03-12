@@ -62,7 +62,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22838837395648,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=410%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -78,7 +78,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23042605665626,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=412%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -94,7 +94,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22245648086658,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -110,7 +110,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23965561878289,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=505%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -126,7 +126,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23085481944912,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=508%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -142,7 +142,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22744975123251,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=512%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.535Z"
     },
     {
@@ -158,7 +158,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23520974903388,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=601%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -174,7 +174,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23546540702685,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=605%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -190,7 +190,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23098705686574,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=608%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -206,7 +206,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22914806625192,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=700%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -222,7 +222,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22325706368744,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=707%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -238,7 +238,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22713531002242,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=711%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -254,7 +254,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23688926637485,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=801%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -270,7 +270,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23652578512248,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=807%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -286,7 +286,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22783226577673,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=901%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -302,7 +302,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23924265284707,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1001%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -318,7 +318,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23429273913263,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1107%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -334,7 +334,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22563885768221,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=105%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -350,7 +350,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22897159565291,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=107%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -366,7 +366,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23592134150938,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=201%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -382,7 +382,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22156281262083,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=203%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -398,7 +398,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22029920964656,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=205%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -414,7 +414,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23048639578828,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=303%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -430,7 +430,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22466645526374,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=305%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -446,7 +446,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2208817348746,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=307%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -462,7 +462,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22845448073971,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -478,7 +478,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22158498840709,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=403%20E%20Chalmers%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -494,7 +494,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22953839379743,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=111%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -510,7 +510,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23437983559238,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=201%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -526,7 +526,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22303049547568,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=301%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -542,7 +542,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23087745559812,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=303%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -558,7 +558,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22920878925183,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -574,7 +574,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22133649525298,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=403%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -590,7 +590,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23933650574746,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=405%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -606,7 +606,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22361721040978,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -622,7 +622,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22243251491025,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=502%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -638,7 +638,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23329343387836,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=601%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -654,7 +654,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22435277735009,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=106%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -670,7 +670,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23330921279339,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=202%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -686,7 +686,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22350583480947,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=208%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -702,7 +702,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22141802566242,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=302%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -718,7 +718,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2301896333085,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=304%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -734,7 +734,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22470622970211,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=400%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -750,7 +750,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23056636385942,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -766,7 +766,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23875682688303,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -782,7 +782,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2239240651993,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=502%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -798,7 +798,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2334435632481,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=602%20E%20Daniel%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -814,7 +814,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23367539248045,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=58%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -830,7 +830,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23721828962705,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=101%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -846,7 +846,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22684310513462,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=103%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -862,7 +862,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22052162042438,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=201%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -878,7 +878,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23743072283783,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=202%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -894,7 +894,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22662511900687,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=301%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -910,7 +910,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22413966153367,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=302%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -926,7 +926,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23854305077982,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -942,7 +942,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2370719866972,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=402%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -958,7 +958,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23631279473535,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -974,7 +974,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2242378556505,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=309%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -990,7 +990,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2355559002809,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=405%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1006,7 +1006,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22388367009457,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=407%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1022,7 +1022,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22343841554887,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=409%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1038,7 +1038,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22203969240245,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1054,7 +1054,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23606756201032,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=503%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1070,7 +1070,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22831821835516,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=505%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1086,7 +1086,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2265260619419,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=507%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1102,7 +1102,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22588391657301,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=601%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1118,7 +1118,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23837693722946,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=604%20E%20White%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1134,7 +1134,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22046207886495,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1150,7 +1150,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23742835327096,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=501%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1166,7 +1166,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23500503075941,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=601%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1182,7 +1182,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23278278548548,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=701%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1198,7 +1198,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2208949157156,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=801%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1214,7 +1214,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2330415981609,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=901%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1230,7 +1230,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23649963728867,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1001%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1246,7 +1246,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23139654809074,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1101%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1262,7 +1262,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22734351866421,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1201%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1278,7 +1278,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23364704375787,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1301%20S%20First%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1294,7 +1294,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22814727968793,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=409%20S%20Third%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1310,7 +1310,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23615302354291,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=502%20S%20Third%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.536Z"
     },
     {
@@ -1326,7 +1326,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23643500586884,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=605%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1342,7 +1342,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.234729885021,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=707%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1358,7 +1358,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22233509981294,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=801%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1374,7 +1374,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22151252854793,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=905%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1390,7 +1390,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22762094366972,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=505%20S%20Fifth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1406,7 +1406,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23548335800696,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=707%20S%20Fifth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1422,7 +1422,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22707149142099,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=801%20S%20Fifth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1438,7 +1438,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23171176652616,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=901%20S%20Fifth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1454,7 +1454,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22119703711057,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=102%20E%20Gregory%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1470,7 +1470,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23861972125853,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=110%20S%20Gregory%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1486,7 +1486,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22817517192064,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=202%20S%20Gregory%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1502,7 +1502,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22752993851414,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=301%20S%20Gregory%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1518,7 +1518,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.2366595702259,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20S%20Gregory%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1534,7 +1534,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22226450770157,
         "management_company": "University Group",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=502%20W%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1550,7 +1550,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22465583824966,
         "management_company": "Green Street Realty",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=601%20S%20Lincoln%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1566,7 +1566,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22272622720686,
         "management_company": "JSM Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=701%20S%20Lincoln%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1582,7 +1582,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22569836462993,
         "management_company": "Smile Student Living",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=805%20S%20Lincoln%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1598,7 +1598,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23315794438427,
         "management_company": "Bankier Apartments",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=808%20S%20Lincoln%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1646,7 +1646,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22816221212672,
         "management_company": "ACC",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=302%20E%20John%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1662,7 +1662,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23787665210662,
         "management_company": "ACC",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=707%20S%20Third%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1678,7 +1678,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23515670311671,
         "management_company": "Latidude",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=608%20E%20University%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1710,7 +1710,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23244540675009,
         "management_company": "Campus Circle",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=401%20W%20University%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1726,7 +1726,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23982111701947,
         "management_company": "212 East",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=212%20E%20Green%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1742,7 +1742,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23350623862426,
         "management_company": "Midtown",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=302%20S%20Second%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1758,7 +1758,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23929937896965,
         "management_company": "Midtown",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=302%20S%20Second%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1774,7 +1774,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22393145342508,
         "management_company": "Octave",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=210%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1806,7 +1806,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23160256015731,
         "management_company": "The Academy",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=508%20E%20Healey%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1822,7 +1822,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23611786042603,
         "management_company": "The Linc",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1301%20S%20Lincoln%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1838,7 +1838,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23992409086675,
         "management_company": "707",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=707%20S%20Fourth%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1854,7 +1854,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23582231673394,
         "management_company": "901 Western",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=901%20S%20Western%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1870,7 +1870,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22631749373114,
         "management_company": "UIUC Housing",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=2041%20S%20Orchard%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1886,7 +1886,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23366601092766,
         "management_company": "UIUC Housing",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=1911%20S%20Orchard%20St%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1902,7 +1902,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.22769260824408,
         "management_company": "UIUC Housing",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=2221%20Ashton%20Ln%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     },
     {
@@ -1918,7 +1918,7 @@ export const mockApartments: Apartment[] = [
         "longitude": -88.23672349921128,
         "management_company": "UIUC Housing",
         "official_website": null,
-        "image_url": null,
+        "image_url": "https://maps.googleapis.com/maps/api/streetview?size=800x600&location=300%20S%20Goodwin%20Ave%2C%20Champaign%2C%20IL",
         "created_at": "2026-03-12T03:24:32.537Z"
     }
 ];

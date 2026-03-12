@@ -121,28 +121,28 @@ export default function Home() {
       <section className="py-24 px-4 bg-white">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center space-y-8">
-            <h2 className="text-4xl font-black text-uiuc-navy uppercase tracking-tighter">Built for Integrity</h2>
+            <h2 className="text-4xl font-black text-uiuc-navy uppercase tracking-tighter">Built for UIUC Students</h2>
             <div className="grid md:grid-cols-3 gap-12 text-left">
               <div className="space-y-4">
                 <div className="h-12 w-12 bg-green-50 rounded-2xl flex items-center justify-center text-green-600">
                   <Star className="h-6 w-6" />
                 </div>
-                <h4 className="font-black text-xl uppercase tracking-tighter">Zero Fake Data</h4>
-                <p className="text-gray-500 font-medium leading-relaxed">We moderate and remove all AI-generated reviews and guessed estimates.</p>
+                <h4 className="font-black text-xl uppercase tracking-tighter">Verified Reviews Only</h4>
+                <p className="text-gray-500 font-medium leading-relaxed">Every review comes from a verified <span className="font-bold text-uiuc-navy">@illinois.edu</span> student. No landlords, no bots, no fake accounts.</p>
               </div>
               <div className="space-y-4">
                 <div className="h-12 w-12 bg-uiuc-orange/10 rounded-2xl flex items-center justify-center text-uiuc-orange">
                   <Building className="h-6 w-6" />
                 </div>
-                <h4 className="font-black text-xl uppercase tracking-tighter">Verified Imagery</h4>
-                <p className="text-gray-500 font-medium leading-relaxed">Real building photos from official sources, not just generic street views.</p>
+                <h4 className="font-black text-xl uppercase tracking-tighter">No Landlord Influence</h4>
+                <p className="text-gray-500 font-medium leading-relaxed">Leasing companies cannot pay to boost their ratings or hide bad reviews. What you read is what students actually experienced.</p>
               </div>
               <div className="space-y-4">
                 <div className="h-12 w-12 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600">
                   <MapPin className="h-6 w-6" />
                 </div>
-                <h4 className="font-black text-xl uppercase tracking-tighter">Rent Transparency</h4>
-                <p className="text-gray-500 font-medium leading-relaxed">Reported rent values are verified by our student community to ensure accuracy.</p>
+                <h4 className="font-black text-xl uppercase tracking-tighter">One Review Per Tenant</h4>
+                <p className="text-gray-500 font-medium leading-relaxed">Each student can only review a building they've lived in — once. Ratings stay honest and reflective of real experiences.</p>
               </div>
             </div>
           </div>

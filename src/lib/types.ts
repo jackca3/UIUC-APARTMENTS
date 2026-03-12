@@ -45,6 +45,7 @@ export interface Review {
   noise_rating: number;
   monthly_rent_paid: number | null;
   written_review: string;
+  image_urls?: string[];
   created_at: string;
 }
 

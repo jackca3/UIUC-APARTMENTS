@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/contexts/auth-context';
+import { AuthModalProvider } from '@/contexts/auth-modal-context';
+import { AuthModal } from '@/components/auth-modal';
 import { Toaster } from '@/components/ui/sonner';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
@@ -22,12 +24,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-          <Toaster />
+          <AuthModalProvider>
+            <div className="flex min-h-screen flex-col">
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+            <AuthModal />
+            <Toaster />
+          </AuthModalProvider>
         </AuthProvider>
       </body>
     </html>

@@ -1,29 +1,36 @@
 "use client";
 
 import { useAuth } from "@/contexts/auth-context";
+import { useAuthModal } from "@/contexts/auth-modal-context";
 import { useEffect, useState } from "react";
 import { getFavorites } from "@/lib/api";
 import { Apartment } from "@/lib/types";
 import { ApartmentCard } from "@/components/apartment-card";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GraduationCap, Mail, Star, Heart, Settings, LogOut, ChevronRight } from "lucide-react";
+import { GraduationCap, Mail, Star, Heart, LogOut, ChevronRight, ShieldCheck, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getUserById } from "@/lib/auth-store";
 import Link from "next/link";
 
 export default function ProfilePage() {
-    const { user, loading: authLoading } = useAuth();
+    const { user, loading: authLoading, signOut } = useAuth();
+    const { openAuthModal } = useAuthModal();
     const [favorites, setFavorites] = useState<Apartment[]>([]);
     const [loading, setLoading] = useState(true);
+    const [joinedDate, setJoinedDate] = useState<string | null>(null);
 
     useEffect(() => {
-        async function loadFavorites() {
+        async function load() {
             if (user) {
                 const favs = await getFavorites(user.id);
                 setFavorites(favs);
+                const stored = getUserById(user.id);
+                if (stored) {
+                    setJoinedDate(new Date(stored.createdAt).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }));
+                }
             }
             setLoading(false);
         }
-        loadFavorites();
+        load();
     }, [user]);
 
     if (authLoading || loading) {
@@ -37,55 +44,73 @@ export default function ProfilePage() {
 
     if (!user) {
         return (
-            <div className="container mx-auto px-4 py-32 text-center">
-                <h1 className="text-4xl font-black text-uiuc-navy mb-4">Please log in to view your profile</h1>
-                <Button asChild className="bg-uiuc-navy">
-                    <Link href="/auth/login">Log In</Link>
+            <div className="container mx-auto px-4 py-32 text-center space-y-6">
+                <div className="bg-uiuc-orange/10 p-6 rounded-full w-20 h-20 flex items-center justify-center mx-auto">
+                    <GraduationCap className="h-10 w-10 text-uiuc-orange" />
+                </div>
+                <h1 className="text-4xl font-black text-uiuc-navy uppercase tracking-tighter">Sign in to view your profile</h1>
+                <p className="text-gray-500 font-medium max-w-sm mx-auto">Create a free account with your @illinois.edu email to leave reviews and save apartments.</p>
+                <Button onClick={() => openAuthModal()} className="bg-uiuc-navy text-white h-14 px-10 rounded-xl font-black uppercase tracking-widest">
+                    Log In / Sign Up
                 </Button>
             </div>
         );
     }
 
-    const username = user.user_metadata?.username || user.email?.split('@')[0] || "illini_user";
-
     return (
         <div className="bg-white min-h-screen">
             <div className="container mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-                    
-                    {/* Sidebar / Info */}
+
+                    {/* Sidebar */}
                     <div className="lg:col-span-4 space-y-8">
                         <div className="bg-uiuc-navy p-10 rounded-[50px] shadow-premium text-white relative overflow-hidden group">
                             <div className="relative z-10 space-y-8 text-center pt-4">
                                 <div className="h-24 w-24 rounded-[30px] bg-white text-uiuc-navy flex items-center justify-center mx-auto text-4xl font-black shadow-2xl transition-transform group-hover:rotate-6">
-                                    {username.charAt(0).toUpperCase()}
+                                    {user.username.charAt(0).toUpperCase()}
                                 </div>
                                 <div>
-                                    <h2 className="text-3xl font-black tracking-tighter uppercase leading-none mb-1">@{username}</h2>
-                                    <p className="text-[10px] font-black uppercase tracking-widest text-white/40">Verified student</p>
-                                </div>
-                                <div className="space-y-4 pt-4 border-t border-white/10">
-                                    <div className="flex items-center gap-3 text-sm font-bold opacity-60 hover:opacity-100 transition-opacity">
-                                        <Mail className="h-4 w-4 text-uiuc-orange" />
-                                        {user.email}
+                                    <h2 className="text-3xl font-black tracking-tighter uppercase leading-none mb-1">@{user.username}</h2>
+                                    <div className="flex items-center justify-center gap-1 mt-2">
+                                        <ShieldCheck className="h-4 w-4 text-uiuc-orange" />
+                                        <span className="text-[10px] font-black uppercase tracking-widest text-uiuc-orange">Verified Illini</span>
                                     </div>
-                                    <div className="flex items-center gap-3 text-sm font-bold opacity-60 hover:opacity-100 transition-opacity">
-                                        <GraduationCap className="h-4 w-4 text-uiuc-orange" />
+                                </div>
+                                <div className="space-y-4 pt-4 border-t border-white/10 text-left">
+                                    <div className="flex items-center gap-3 text-sm font-bold opacity-70 hover:opacity-100 transition-opacity">
+                                        <Mail className="h-4 w-4 text-uiuc-orange shrink-0" />
+                                        <span className="truncate">{user.email}</span>
+                                    </div>
+                                    <div className="flex items-center gap-3 text-sm font-bold opacity-70 hover:opacity-100 transition-opacity">
+                                        <GraduationCap className="h-4 w-4 text-uiuc-orange shrink-0" />
                                         University of Illinois
                                     </div>
+                                    {joinedDate && (
+                                        <div className="flex items-center gap-3 text-sm font-bold opacity-70 hover:opacity-100 transition-opacity">
+                                            <CalendarDays className="h-4 w-4 text-uiuc-orange shrink-0" />
+                                            Joined {joinedDate}
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <Star className="absolute -bottom-10 -left-10 h-48 w-48 text-white/5 rotate-12 group-hover:rotate-45 transition-transform duration-1000" />
                         </div>
 
-                        <div className="space-y-4">
-                            <ProfileMenuButton label="Account Settings" icon={<Settings className="h-4 w-4" />} />
-                            <ProfileMenuButton label="My Reviews" icon={<Star className="h-4 w-4" />} />
-                            <ProfileMenuButton label="Log Out" icon={<LogOut className="h-4 w-4" />} variant="danger" />
-                        </div>
+                        <button
+                            onClick={signOut}
+                            className="w-full flex items-center justify-between p-6 rounded-[30px] border bg-red-50/10 border-red-100 hover:bg-red-50 transition-all group"
+                        >
+                            <div className="flex items-center gap-4">
+                                <div className="h-10 w-10 rounded-2xl flex items-center justify-center bg-red-500 text-white">
+                                    <LogOut className="h-4 w-4" />
+                                </div>
+                                <span className="text-xs font-black uppercase tracking-widest text-red-500">Log Out</span>
+                            </div>
+                            <ChevronRight className="h-4 w-4 text-red-300" />
+                        </button>
                     </div>
 
-                    {/* Main Content: Favorites */}
+                    {/* Main Content */}
                     <div className="lg:col-span-8 space-y-12">
                         <div className="flex items-center justify-between border-b border-gray-100 pb-8">
                             <div>
@@ -121,19 +146,5 @@ export default function ProfilePage() {
                 </div>
             </div>
         </div>
-    );
-}
-
-function ProfileMenuButton({ label, icon, variant }: { label: string; icon: React.ReactNode; variant?: "danger" }) {
-    return (
-        <button className={`w-full flex items-center justify-between p-6 rounded-[30px] border transition-all hover:scale-[1.02] active:scale-98 group ${variant === 'danger' ? 'bg-red-50/10 border-red-100 hover:bg-red-50' : 'bg-white border-gray-50 shadow-sm hover:shadow-premium'}`}>
-            <div className="flex items-center gap-4">
-                <div className={`h-10 w-10 rounded-2xl flex items-center justify-center transition-colors ${variant === 'danger' ? 'bg-red-500 text-white' : 'bg-gray-50 group-hover:bg-uiuc-navy group-hover:text-white'}`}>
-                    {icon}
-                </div>
-                <span className={`text-xs font-black uppercase tracking-widest ${variant === 'danger' ? 'text-red-500' : 'text-uiuc-navy'}`}>{label}</span>
-            </div>
-            <ChevronRight className={`h-4 w-4 ${variant === 'danger' ? 'text-red-300' : 'text-gray-200 group-hover:text-uiuc-navy'}`} />
-        </button>
     );
 }

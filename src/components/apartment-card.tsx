@@ -1,9 +1,9 @@
+"use client";
+
 import { Apartment } from "@/lib/types";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Building, MapPin, MessageSquare, Star, Heart } from "lucide-react";
+import { Building, MapPin, MessageSquare, Heart } from "lucide-react";
 import Link from "next/link";
-import { getStreetViewUrl } from "@/lib/utils";
 import { useState } from "react";
 import { toggleFavorite } from "@/lib/api";
 import { cn } from "@/lib/utils";
@@ -15,25 +15,7 @@ interface ApartmentCardProps {
 
 export function ApartmentCard({ apartment, reviewCount = 0 }: ApartmentCardProps) {
     const [isFavorited, setIsFavorited] = useState(apartment.is_favorited || false);
-    
-    // Improved automated image fallback system
-    const streetView = getStreetViewUrl(apartment.address);
-    const placeholder = `https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800&h=600`;
-    
-    const [imgSrc, setImgSrc] = useState(apartment.image_url || streetView);
-    const [fallbackStep, setFallbackStep] = useState(apartment.image_url ? 0 : 1);
-
-    const handleImageError = () => {
-        if (fallbackStep === 0) {
-            // First failure: Try Street View
-            setImgSrc(streetView);
-            setFallbackStep(1);
-        } else if (fallbackStep === 1) {
-            // Second failure: Try High-res Placeholder
-            setImgSrc(placeholder);
-            setFallbackStep(2);
-        }
-    };
+    const [imgError, setImgError] = useState(false);
 
     const handleToggleFavorite = async (e: React.MouseEvent) => {
         e.preventDefault();
@@ -42,31 +24,39 @@ export function ApartmentCard({ apartment, reviewCount = 0 }: ApartmentCardProps
         setIsFavorited(!isFavorited);
     };
 
+    const hasImage = apartment.image_url && !imgError;
+
     return (
         <Card className="overflow-hidden shadow-premium hover:shadow-premium-hover transition-all duration-500 group cursor-pointer h-full flex flex-col border-none bg-white rounded-3xl">
-            <Link href={`/apartments/${apartment.slug}`} className="flex flex-col h-full">
-                <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
-                    <img
-                        src={imgSrc}
-                        alt={apartment.name}
-                        onError={handleImageError}
-                        loading="eager"
-                        className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
-                    />
-                    
+            <Link href={`/apartments/${apartment.slug}`} className="flex flex-col h-full relative">
+
+                {/* Building photo — shown when image_url is set */}
+                {hasImage && (
+                    <div className="relative h-44 overflow-hidden bg-gray-100 rounded-t-3xl">
+                        <img
+                            src={apartment.image_url!}
+                            alt={apartment.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            onError={() => setImgError(true)}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    </div>
+                )}
+
+                <CardContent className={cn("p-7 flex-1", hasImage ? "pt-5" : "pt-9")}>
                     {/* Favorite Button */}
-                    <button 
+                    <button
                         onClick={handleToggleFavorite}
-                        className="absolute top-4 right-4 p-2.5 rounded-2xl bg-white/80 backdrop-blur-md shadow-lg hover:bg-white transition-all z-10 group/fav"
+                        className="absolute top-6 right-6 p-2 rounded-2xl hover:bg-gray-100 transition-all z-10 group/fav"
+                        aria-label="Toggle favorite"
                     >
                         <Heart className={cn(
                             "h-5 w-5 transition-colors",
                             isFavorited ? "fill-red-500 text-red-500" : "text-gray-400 group-hover/fav:text-red-400"
                         )} />
                     </button>
-                </div>
-                <CardContent className="p-7 flex-1">
-                    <h3 className="text-xl font-black text-uiuc-navy group-hover:text-uiuc-orange transition-colors mb-2 tracking-tight leading-tight">
+
+                    <h3 className="text-xl font-black text-uiuc-navy group-hover:text-uiuc-orange transition-colors mb-2 pr-8 tracking-tight leading-tight">
                         {apartment.name}
                     </h3>
                     <p className="text-[10px] text-uiuc-navy/40 font-black uppercase tracking-widest mb-4 flex items-center gap-2">
@@ -76,6 +66,7 @@ export function ApartmentCard({ apartment, reviewCount = 0 }: ApartmentCardProps
                         {apartment.description || "No description provided."}
                     </p>
                 </CardContent>
+
                 <CardFooter className="p-7 pt-0 items-center justify-between flex-none mt-auto border-t border-gray-50 mt-4 pt-4">
                     <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-tighter text-uiuc-navy/60">
                         <Building className="h-3.5 w-3.5" />

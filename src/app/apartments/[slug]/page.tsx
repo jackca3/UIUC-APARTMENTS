@@ -9,8 +9,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapPin, Building, ShieldCheck, ThumbsUp, MessageSquare, Heart, ExternalLink, Star } from "lucide-react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { getStreetViewUrl, cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/auth-context";
+import { useAuthModal } from "@/contexts/auth-modal-context";
 
 export default function ApartmentPage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
@@ -18,6 +20,21 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
     const [reviews, setReviews] = useState<ReviewWithAuthor[]>([]);
     const [loading, setLoading] = useState(true);
     const [isFavorited, setIsFavorited] = useState(false);
+    const { user } = useAuth();
+    const { openAuthModal } = useAuthModal();
+    const router = useRouter();
+
+    const currentUserReview = user ? reviews.find(r => r.user_id === user.id) : null;
+
+    const handleWriteReview = () => {
+        if (!user) {
+            openAuthModal("Sign in to leave a verified review");
+        } else if (currentUserReview) {
+            router.push(`/apartments/${resolvedParams.slug}/write-review?edit=${currentUserReview.id}`);
+        } else {
+            router.push(`/apartments/${resolvedParams.slug}/write-review`);
+        }
+    };
 
     useEffect(() => {
         async function loadData() {
@@ -163,10 +180,8 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                                     <h2 className="text-4xl font-black text-uiuc-navy uppercase tracking-tighter">Verified Reports</h2>
                                     <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px]">What students are saying about life here.</p>
                                 </div>
-                                <Button asChild className="bg-uiuc-navy hover:bg-black text-white h-20 px-12 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-transform hover:scale-105 active:scale-95 text-xs">
-                                    <Link href={`/apartments/${apartment.slug}/write-review`}>
-                                        Write a Review
-                                    </Link>
+                                <Button onClick={handleWriteReview} className="bg-uiuc-navy hover:bg-black text-white h-20 px-12 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-transform hover:scale-105 active:scale-95 text-xs">
+                                    {currentUserReview ? "Edit Your Review" : "Write a Review"}
                                 </Button>
                             </div>
 
@@ -187,18 +202,49 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                                                         <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Verified Illini • {new Date(review.created_at).toLocaleDateString()}</p>
                                                     </div>
                                                 </div>
-                                                {review.monthly_rent_paid && (
-                                                    <div className="bg-white px-8 py-4 rounded-3xl shadow-sm border border-gray-100 text-center">
-                                                        <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Paid</p>
-                                                        <p className="text-2xl font-black text-uiuc-navy">${Math.round(review.monthly_rent_paid)}<span className="text-sm text-gray-300 ml-1">/mo</span></p>
-                                                    </div>
-                                                )}
+                                                <div className="flex gap-4">
+                                                    {review.monthly_rent_paid && (
+                                                        <div className="bg-white px-8 py-4 rounded-3xl shadow-sm border border-gray-100 text-center">
+                                                            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Paid</p>
+                                                            <p className="text-xl font-black text-uiuc-navy">${Math.round(review.monthly_rent_paid)}<span className="text-sm text-gray-300 ml-1">/mo</span></p>
+                                                        </div>
+                                                    )}
+                                                    {user && user.id === review.user_id && (
+                                                        <Button 
+                                                            variant="outline" 
+                                                            size="icon"
+                                                            asChild
+                                                            className="rounded-full mt-2 h-10 w-10 text-gray-400 hover:text-uiuc-orange hover:bg-orange-50 transition-colors border-gray-200"
+                                                        >
+                                                            <Link href={`/apartments/${resolvedParams.slug}/write-review?edit=${review.id}`} title="Edit Review">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                                            </Link>
+                                                        </Button>
+                                                    )}
+                                                </div>
                                             </div>
 
                                             <div className="space-y-8">
                                                 <p className="text-xl text-gray-700 font-medium italic leading-relaxed">
                                                     "{review.written_review}"
                                                 </p>
+
+                                                {/* Review photos */}
+                                                {(review as any).image_urls?.length > 0 && (
+                                                    <div className={`grid gap-3 ${(review as any).image_urls.length === 1 ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                                                        {(review as any).image_urls.map((url: string, imgIdx: number) => (
+                                                            <a key={imgIdx} href={url} target="_blank" rel="noopener noreferrer"
+                                                                className="rounded-2xl overflow-hidden block aspect-video bg-gray-100 hover:opacity-90 transition-opacity">
+                                                                <img
+                                                                    src={url}
+                                                                    alt={`Review photo ${imgIdx + 1}`}
+                                                                    className="w-full h-full object-cover"
+                                                                    onError={e => { (e.target as HTMLImageElement).parentElement!.style.display = 'none'; }}
+                                                                />
+                                                            </a>
+                                                        ))}
+                                                    </div>
+                                                )}
 
                                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-10 border-t border-gray-100">
                                                     <ReviewMetric label="Management" rating={review.management_rating} />
@@ -217,10 +263,8 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                                     </div>
                                     <h3 className="text-4xl font-black text-uiuc-navy mb-4 uppercase tracking-tighter">No reviews yet</h3>
                                     <p className="text-gray-400 font-bold mb-12 max-w-sm mx-auto uppercase tracking-widest text-[10px] leading-relaxed">Apt.ly relies on student honesty. Be the first to share your experience with {apartment.name}.</p>
-                                    <Button asChild className="bg-uiuc-orange hover:bg-uiuc-orange/90 text-white h-20 px-16 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-all hover:scale-105 active:scale-95 text-xs">
-                                        <Link href={`/apartments/${apartment.slug}/write-review`}>
-                                            Write the first review
-                                        </Link>
+                                    <Button onClick={handleWriteReview} className="bg-uiuc-orange hover:bg-uiuc-orange/90 text-white h-20 px-16 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-all hover:scale-105 active:scale-95 text-xs">
+                                        Write the First Review
                                     </Button>
                                 </div>
                             )}

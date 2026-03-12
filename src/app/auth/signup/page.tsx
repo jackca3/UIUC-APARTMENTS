@@ -1,16 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Mail, GraduationCap } from "lucide-react";
+import { signUp } from "@/lib/auth-store";
+import { useAuth } from "@/contexts/auth-context";
 
-export default function SignupPage() {
+function SignupContent() {
     const [step, setStep] = useState(1);
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
@@ -18,6 +20,8 @@ export default function SignupPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const { refreshSession } = useAuth();
 
     const handleSendCode = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,31 +30,71 @@ export default function SignupPage() {
             return;
         }
         setLoading(true);
-        await new Promise((r) => setTimeout(r, 1000));
-        setLoading(false);
-        toast.success("Verification code sent to " + email);
-        setStep(2);
+        try {
+            const res = await fetch("/api/send-verification", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                toast.error(data.error || "Failed to send code.");
+                setLoading(false);
+                return;
+            }
+            toast.success("Verification code sent to " + email);
+            setStep(2);
+        } catch {
+            toast.error("Network error. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleVerifyCode = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        await new Promise((r) => setTimeout(r, 800));
-        setLoading(false);
-        if (code !== "123456" && code.length !== 6) { // Simple mock validation
-             toast.error("Invalid verification code.");
-             return;
+        try {
+            const res = await fetch("/api/verify-code", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, code }),
+            });
+            const data = await res.json();
+            if (!res.ok) {
+                toast.error(data.error || "Invalid code.");
+                setLoading(false);
+                return;
+            }
+            setStep(3);
+        } catch {
+            toast.error("Network error. Please try again.");
+        } finally {
+            setLoading(false);
         }
-        setStep(3);
     };
 
     const handleFinalize = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        await new Promise((r) => setTimeout(r, 1200));
+        
+        const result = await signUp(email, username, password, true);
         setLoading(false);
+
+        if (!result.ok) { 
+            toast.error(result.error || "Signup failed."); 
+            return; 
+        }
+
+        refreshSession();
         toast.success("Account created successfully!");
-        router.push("/");
+        
+        const redirect = searchParams?.get("redirect");
+        if (redirect) {
+            router.push(redirect);
+        } else {
+            router.push("/");
+        }
     };
 
     return (
@@ -163,5 +207,13 @@ export default function SignupPage() {
                 </CardFooter>
             </Card>
         </div>
+    );
+}
+
+export default function SignupPage() {
+    return (
+        <Suspense fallback={<div className="container mx-auto px-4 py-12 min-h-[70vh] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-uiuc-navy" /></div>}>
+            <SignupContent />
+        </Suspense>
     );
 }
