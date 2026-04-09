@@ -161,11 +161,28 @@ export async function getReviewsForApartment(apartmentId: string): Promise<Revie
     }
 
     const supabase = createClient();
+    
+    // First attempt: Joined fetch
     const { data, error } = await supabase
         .from('reviews')
         .select('*, profiles(first_name, last_name, is_verified)')
         .eq('apartment_id', apartmentId)
         .order('created_at', { ascending: false });
+
+    // Fallback if join relationship is missing in Supabase cache
+    if (error?.message?.includes('relationship') || error?.message?.includes('profiles')) {
+        console.warn('Relationship "profiles" not found in cache, falling back to non-joined fetch.');
+        const { data: secondData, error: secondError } = await supabase
+            .from('reviews')
+            .select('*')
+            .eq('apartment_id', apartmentId)
+            .order('created_at', { ascending: false });
+            
+        if (secondError || !secondData) {
+             return mockReviews.filter(r => r.apartment_id === apartmentId);
+        }
+        return secondData.map(rowToReview);
+    }
 
     if (error || !data) {
         return mockReviews.filter(r => r.apartment_id === apartmentId);
@@ -183,11 +200,24 @@ export async function getReviewById(reviewId: string): Promise<ReviewWithAuthor 
     }
 
     const supabase = createClient();
+    
+    // First attempt: Joined fetch
     const { data, error } = await supabase
         .from('reviews')
         .select('*, profiles(first_name, last_name, is_verified)')
         .eq('id', reviewId)
         .single();
+
+    // Fallback if join relationship is missing in Supabase cache
+    if (error?.message?.includes('relationship') || error?.message?.includes('profiles')) {
+        const { data: secondData, error: secondError } = await supabase
+            .from('reviews')
+            .select('*')
+            .eq('id', reviewId)
+            .single();
+        if (secondError || !secondData) return null;
+        return rowToReview(secondData);
+    }
 
     if (error || !data) return null;
     return rowToReview(data);
@@ -372,7 +402,7 @@ export async function addReview(data: NewReviewData): Promise<ReviewWithAuthor> 
         // We continue anyway, but the review insert might fail if FK is strict
     }
 
-    // 2. Insert Review
+    // 2. Insert Review (Simplified select to bypass schema cache issues)
     const { data: inserted, error } = await supabase
         .from('reviews')
         .insert({
@@ -386,14 +416,25 @@ export async function addReview(data: NewReviewData): Promise<ReviewWithAuthor> 
             written_review: writtenReview,
             image_urls: imageUrls,
         })
-        .select('*, profiles(first_name, last_name, is_verified)')
+        .select('*')
         .single();
 
     if (error || !inserted) {
         console.error('Review insert failed:', error);
         throw new Error(error?.message || 'Failed to submit review.');
     }
-    return rowToReview(inserted);
+
+    // Manually construct the review object with the author info we already have
+    // This avoids needing a database join that might be broken in the cache
+    return {
+        ...inserted,
+        profile: {
+            first_name: data.username,
+            last_name: null,
+            is_verified: true
+        },
+        comments: []
+    } as ReviewWithAuthor;
 }
 
 
@@ -446,9 +487,15 @@ export async function updateReview(reviewId: string, data: NewReviewData): Promi
             image_urls: imageUrls,
         })
         .eq('id', reviewId)
-        .select('*, profiles(first_name, last_name, is_verified)')
+        .select('*')
         .single();
 
     if (error || !updated) return null;
-    return rowToReview(updated);
+    
+    // Return with existing profile info to avoid the relationship join error
+    return {
+        ...updated,
+        profile: existing.profile,
+        comments: existing.comments || []
+    } as ReviewWithAuthor;
 }
