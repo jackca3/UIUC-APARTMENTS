@@ -1,28 +1,29 @@
 "use client";
 
-import { useState, use, useEffect } from "react";
+import { useState, use, useEffect, Suspense } from "react";
 import { useAuth } from "@/contexts/auth-context";
-import { StarRating } from "@/components/star-rating";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ShieldAlert, ImagePlus, X, Building2, Camera, UserSquare2 } from "lucide-react";
+import { ShieldAlert, ImagePlus, X, Building2, Camera, UserSquare2, Star, Send, ArrowLeft, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { addReview, updateReview, getReviewById, getApartmentBySlug } from "@/lib/api";
+import { StarRatingInput } from "@/components/star-rating-input";
 
-export default function WriteReviewPage({ params }: { params: Promise<{ slug: string }> }) {
-    const resolvedParams = use(params);
+function WriteReviewForm({ slug }: { slug: string }) {
     const { user, is_verified, loading } = useAuth();
     const router = useRouter();
     const searchParams = useSearchParams();
     const editReviewId = searchParams?.get("edit");
+    
     const [submitting, setSubmitting] = useState(false);
     const [fetchingReview, setFetchingReview] = useState(!!editReviewId);
+    const [apartmentName, setApartmentName] = useState("");
 
     // Form State
     const [company, setCompany] = useState<string>("");
@@ -36,8 +37,18 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
     const [reviewImageUrls, setReviewImageUrls] = useState<string[]>([""]);
 
     useEffect(() => {
-        async function loadEditData() {
-            if (!editReviewId) return;
+        async function loadData() {
+            // Load apartment info
+            try {
+                const apt = await getApartmentBySlug(slug);
+                if (apt) setApartmentName(apt.name);
+            } catch (e) { /* ignore */ }
+
+            if (!editReviewId) {
+                setFetchingReview(false);
+                return;
+            };
+
             try {
                 const review = await getReviewById(editReviewId);
                 if (review && review.user_id === user?.id) {
@@ -54,11 +65,8 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
                         setReviewImageUrls([...review.image_urls, ""]);
                     }
 
-                    // We can optionally load the apt's image_url and management_company too, 
-                    // but doing so prevents them from just updating the text.
                     const apt = await getApartmentBySlug(review.apartment_id);
                     if (apt?.management_company) {
-                        // Check if it's one of the presets or "Other"
                         const presets = ["Smile Student Living", "JSM Living", "Green Street Realty", "MHM Properties", "American Campus Communities", "Bankier Apartments", "Roland Realty", "University Group", "Campustown Rentals", "Independent"];
                         if (presets.includes(apt.management_company)) {
                             setCompany(apt.management_company);
@@ -69,7 +77,7 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
                     }
                 } else if (review) {
                     toast.error("You can only edit your own reviews.");
-                    router.push(`/apartments/${resolvedParams.slug}`);
+                    router.push(`/apartments/${slug}`);
                 }
             } catch (e) {
                 toast.error("Failed to load review details.");
@@ -77,8 +85,52 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
                 setFetchingReview(false);
             }
         }
-        if (!loading) loadEditData();
-    }, [editReviewId, user, loading, router, resolvedParams.slug]);
+        if (!loading) loadData();
+
+        // ── Paste to Upload Logic ──
+        const handlePaste = (e: ClipboardEvent) => {
+            const items = e.clipboardData?.items;
+            const files = e.clipboardData?.files;
+            
+            if (!items && !files) return;
+
+            const handleFile = (file: File) => {
+                if (file.type.indexOf("image") === -1) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const dataUrl = event.target?.result as string;
+                    setReviewImageUrls(prev => {
+                        // Extract existing valid URLs (either regular ones or Base64)
+                        const currentValid = prev.filter(u => u.trim());
+                        if (currentValid.length < 5) {
+                            return [...currentValid, dataUrl, ""];
+                        }
+                        toast.warning("Maximum 5 images allowed");
+                        return prev;
+                    });
+                    toast.success("Image pasted!");
+                };
+                reader.readAsDataURL(file);
+            };
+
+            if (items) {
+                for (let i = 0; i < items.length; i++) {
+                    if (items[i].type.indexOf("image") !== -1) {
+                        const file = items[i].getAsFile();
+                        if (file) handleFile(file);
+                    }
+                }
+            } else if (files) {
+                for (let i = 0; i < files.length; i++) {
+                    handleFile(files[i]);
+                }
+            }
+        };
+
+        window.addEventListener("paste", handlePaste);
+        return () => window.removeEventListener("paste", handlePaste);
+    }, [editReviewId, user, loading, router, slug]);
 
     if (loading || fetchingReview) return (
             <div className="container mx-auto px-4 py-32 flex flex-col items-center justify-center space-y-4">
@@ -89,17 +141,24 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
 
     if (!user || !is_verified) {
         return (
-            <div className="container mx-auto px-4 py-20 flex justify-center">
-                <Card className="max-w-md w-full text-center p-6 border-red-100 bg-red-50">
-                    <ShieldAlert className="h-12 w-12 text-red-400 mx-auto mb-4" />
-                    <h2 className="text-xl font-bold text-red-900 mb-2">Verified Student Account Required</h2>
-                    <p className="text-red-700 mb-6">You must be logged in with a verified @illinois.edu email to leave a review.</p>
-                    <Button asChild className="w-full bg-uiuc-navy hover:bg-black">
-                        <Link href={`/auth/login?redirect=/apartments/${resolvedParams.slug}/write-review`}>
-                            {user ? "Verify Your Account" : "Log In to Review"}
+            <div className="container mx-auto px-4 py-20 flex flex-col items-center text-center">
+                <div className="bg-uiuc-orange/10 p-6 rounded-full mb-8">
+                    <ShieldAlert className="h-16 w-16 text-uiuc-orange" />
+                </div>
+                <h1 className="text-4xl font-black text-uiuc-navy mb-4 uppercase">Verification Required</h1>
+                <p className="text-xl text-gray-500 max-w-lg mb-10 font-medium">
+                    To maintain data integrity, only verified students with an <span className="text-uiuc-orange font-bold">@illinois.edu</span> account can leave reviews.
+                </p>
+                <div className="flex gap-4 flex-wrap justify-center">
+                    <Button asChild className="bg-uiuc-navy text-white h-14 px-10 rounded-xl font-bold">
+                        <Link href={`/auth/login?redirect=/apartments/${slug}/write-review`}>
+                            {user ? "Verify Your Account" : "Login to Verify"}
                         </Link>
                     </Button>
-                </Card>
+                    <Button variant="outline" asChild className="h-14 px-8 rounded-xl font-bold border-gray-200">
+                        <Link href={`/apartments/${slug}`}>Back to Building</Link>
+                    </Button>
+                </div>
             </div>
         );
     }
@@ -107,7 +166,8 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!ratings.management || !ratings.maintenance || !ratings.value || !ratings.noise) {
+        const allRatingsSet = Object.values(ratings).every(r => r > 0);
+        if (!allRatingsSet) {
             toast.error("Please provide a star rating for all categories.");
             return;
         }
@@ -129,9 +189,9 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
         setSubmitting(true);
         try {
             const reviewPayload = {
-                apartmentSlug: resolvedParams.slug,
+                apartmentSlug: slug,
                 user_id: user.id,
-                username: user.username,
+                username: user.email?.split("@")[0] || "illini_student",
                 managementCompany: company === "Other" ? otherCompany.trim() : company,
                 managementRating: ratings.management,
                 maintenanceRating: ratings.maintenance,
@@ -148,255 +208,294 @@ export default function WriteReviewPage({ params }: { params: Promise<{ slug: st
                 toast.success("Review updated successfully!");
             } else {
                 await addReview(reviewPayload);
-                toast.success("Review submitted! Thanks for helping other students.");
+                toast.success("Review submitted! Thank you.");
             }
-            router.push(`/apartments/${resolvedParams.slug}`);
+            router.push(`/apartments/${slug}`);
         } catch (err) {
-            toast.error("Something went wrong. Please try again.");
+            const msg = err instanceof Error ? err.message : String(err);
+            console.error('[WriteReview] Submission failed:', msg, err);
+            toast.error(`Submission failed: ${msg}`);
+
         } finally {
             setSubmitting(false);
         }
     };
 
-    const handleRatingChange = (category: keyof typeof ratings) => (val: number) => {
-        setRatings(prev => ({ ...prev, [category]: val }));
-    };
-
-    const addImageField = () => setReviewImageUrls(prev => [...prev, ""]);
-    const updateImageUrl = (i: number, val: string) => {
+    const addReviewImage = () => setReviewImageUrls(prev => [...prev, ""]);
+    const updateReviewImage = (i: number, val: string) => {
         setReviewImageUrls(prev => prev.map((u, idx) => idx === i ? val : u));
     };
-    const removeImageField = (i: number) => {
+    const removeReviewImage = (i: number) => {
         setReviewImageUrls(prev => prev.filter((_, idx) => idx !== i));
     };
 
-    const criteria = [
-        { key: "management", label: "Property Management", desc: "Responsiveness and professionalism" },
-        { key: "maintenance", label: "Maintenance", desc: "Speed and quality of repairs" },
-        { key: "value", label: "Value for Money", desc: "Is the rent fair for the quality?" },
-        { key: "noise", label: "Noise Level", desc: "Soundproofing and neighbor noise" },
-    ] as const;
-
     return (
-        <div className="container mx-auto px-4 py-12 max-w-3xl">
-            <h1 className="text-3xl font-extrabold text-uiuc-navy mb-8">
-                {editReviewId ? "Edit your Review" : "Review this Apartment"}
-            </h1>
+        <div className="container mx-auto px-4 py-12 max-w-4xl">
+            <Button variant="ghost" asChild className="mb-8 pl-0 hover:bg-transparent -ml-2 text-gray-400 font-bold uppercase tracking-widest text-xs">
+                <Link href={`/apartments/${slug}`} className="flex items-center gap-2">
+                    <ArrowLeft className="h-4 w-4" /> Back to {apartmentName || "building"}
+                </Link>
+            </Button>
 
-            <form onSubmit={handleSubmit}>
-                {/* ── Management Company ── */}
-                <Card className="mb-8 border-none shadow-premium">
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <UserSquare2 className="h-5 w-5 text-uiuc-orange" />
-                            <CardTitle>Management Company</CardTitle>
-                        </div>
-                        <CardDescription>Who manages this property?</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="company">Select Leasing Company</Label>
-                            <Select value={company} onValueChange={(val) => setCompany(val || "")}>
-                                <SelectTrigger id="company">
-                                    <SelectValue placeholder="Select a company" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="Smile Student Living">Smile Student Living</SelectItem>
-                                    <SelectItem value="JSM Living">JSM Living</SelectItem>
-                                    <SelectItem value="Green Street Realty">Green Street Realty</SelectItem>
-                                    <SelectItem value="MHM Properties">MHM Properties</SelectItem>
-                                    <SelectItem value="American Campus Communities">American Campus Communities (ACC)</SelectItem>
-                                    <SelectItem value="Bankier Apartments">Bankier Apartments</SelectItem>
-                                    <SelectItem value="Roland Realty">Roland Realty</SelectItem>
-                                    <SelectItem value="University Group">University Group</SelectItem>
-                                    <SelectItem value="Campustown Rentals">Campustown Rentals</SelectItem>
-                                    <SelectItem value="Independent">Independent Landlord</SelectItem>
-                                    <SelectItem value="Other">Other...</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-                        
-                        {company === "Other" && (
-                            <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
-                                <Label htmlFor="other-company">Company Name</Label>
-                                <Input
-                                    id="other-company"
-                                    placeholder="Type the company name..."
-                                    value={otherCompany}
-                                    onChange={e => setOtherCompany(e.target.value)}
-                                />
-                            </div>
-                        )}
-                    </CardContent>
-                </Card>
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="flex-1 w-full">
+                    <h1 className="text-5xl font-black text-uiuc-navy mb-2 tracking-tighter uppercase leading-none">
+                        {editReviewId ? "Edit" : "Post"} a <span className="text-uiuc-orange">Review</span>
+                    </h1>
+                    <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-10">Review for {apartmentName || slug}</p>
 
-                {/* ── Ratings ── */}
-                <Card className="mb-8 overflow-hidden border-none shadow-premium bg-white/80 backdrop-blur-sm">
-                    <CardHeader className="bg-uiuc-navy py-6 text-white">
-                        <CardTitle className="text-xl">Student Ratings</CardTitle>
-                        <CardDescription className="text-blue-100/80">Be honest and specific. Your ratings help other students find better housing.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-8 pt-8 p-6 md:p-8">
-                        {criteria.map((c) => (
-                            <div key={c.key} className="flex flex-col sm:flex-row sm:items-center justify-between items-start gap-4">
-                                <div className="space-y-1">
-                                    <Label className="text-base font-bold text-uiuc-navy">{c.label}</Label>
-                                    <p className="text-sm text-gray-500 max-w-md">{c.desc}</p>
+                    <form onSubmit={handleSubmit} className="space-y-8">
+                        {/* ── Management Info ── */}
+                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-uiuc-navy p-2 rounded-lg text-white">
+                                    <UserSquare2 className="h-5 w-5" />
                                 </div>
-                                <div className="flex-shrink-0">
-                                    <StarRating rating={ratings[c.key]} interactive onRatingChange={handleRatingChange(c.key)} size="lg" />
+                                <h2 className="text-xl font-black text-uiuc-navy uppercase tracking-tight">Management</h2>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div className="space-y-2">
+                                    <Label className="font-bold text-gray-700">Select Leasing Company *</Label>
+                                    <Select value={company} onValueChange={(val) => setCompany(val || "")}>
+                                        <SelectTrigger className="h-12 bg-gray-50 border-none rounded-xl">
+                                            <SelectValue placeholder="Who manages this property?" />
+                                        </SelectTrigger>
+                                        <SelectContent className="rounded-xl border-none shadow-xl">
+                                            <SelectItem value="Smile Student Living">Smile Student Living</SelectItem>
+                                            <SelectItem value="JSM Living">JSM Living</SelectItem>
+                                            <SelectItem value="Green Street Realty">Green Street Realty</SelectItem>
+                                            <SelectItem value="MHM Properties">MHM Properties</SelectItem>
+                                            <SelectItem value="American Campus Communities">American Campus Communities (ACC)</SelectItem>
+                                            <SelectItem value="Bankier Apartments">Bankier Apartments</SelectItem>
+                                            <SelectItem value="Roland Realty">Roland Realty</SelectItem>
+                                            <SelectItem value="University Group">University Group</SelectItem>
+                                            <SelectItem value="Campustown Rentals">Campustown Rentals</SelectItem>
+                                            <SelectItem value="Independent">Independent Landlord</SelectItem>
+                                            <SelectItem value="Other">Other...</SelectItem>
+                                        </SelectContent>
+                                    </Select>
                                 </div>
-                            </div>
-                        ))}
-                    </CardContent>
-                </Card>
-
-                {/* ── Building Photo ── */}
-                <Card className="mb-8 border-none shadow-premium">
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <Building2 className="h-5 w-5 text-uiuc-orange" />
-                            <CardTitle>Building Photo <span className="text-gray-400 font-normal text-sm">(Optional)</span></CardTitle>
-                        </div>
-                        <CardDescription>
-                            Add a photo of the building exterior so others can identify it at a glance. This will appear on the apartment card in search results.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                        <Label htmlFor="building-img">Building Image URL</Label>
-                        <Input
-                            id="building-img"
-                            type="url"
-                            placeholder="https://example.com/building-photo.jpg"
-                            value={buildingImageUrl}
-                            onChange={e => setBuildingImageUrl(e.target.value)}
-                        />
-                        <p className="text-xs text-gray-400">
-                            Paste the URL of an image from the official leasing site, a direct screenshot upload (e.g. via <a href="https://imgur.com" target="_blank" className="text-uiuc-orange underline">Imgur</a>), or Google Maps.
-                        </p>
-                        {buildingImageUrl.trim() && (
-                            <div className="mt-3 rounded-2xl overflow-hidden border border-gray-100 aspect-video bg-gray-50">
-                                <img
-                                    src={buildingImageUrl}
-                                    alt="Building preview"
-                                    className="w-full h-full object-cover"
-                                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                                />
-                            </div>
-                        )}
-                    </CardContent>
-                </Card>
-
-                {/* ── Review Text + Rent ── */}
-                <Card className="mb-8 border-none shadow-premium">
-                    <CardHeader>
-                        <CardTitle>Rent & Written Review</CardTitle>
-                        <CardDescription>Reporting your rent helps create a transparent market for everyone.</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                        <div className="space-y-2">
-                            <Label htmlFor="rent">Monthly Rent Paid <span className="text-gray-400 font-normal">(Optional)</span></Label>
-                            <div className="relative">
-                                <span className="absolute left-3 top-2.5 text-gray-400">$</span>
-                                <Input
-                                    id="rent"
-                                    type="number"
-                                    placeholder="e.g. 850"
-                                    className="pl-7"
-                                    value={monthlyRent}
-                                    onChange={e => setMonthlyRent(e.target.value)}
-                                />
-                            </div>
-                            <p className="text-[10px] text-gray-400">Total rent per person, per month.</p>
-                        </div>
-
-                        <div className="space-y-2">
-                            <Label htmlFor="review">What should other students know?</Label>
-                            <Textarea
-                                id="review"
-                                placeholder="Describe your experience — management response time, the physical condition of the building, noise levels, internet speed, hidden fees..."
-                                required
-                                rows={8}
-                                className="resize-none"
-                                value={reviewText}
-                                onChange={e => setReviewText(e.target.value)}
-                            />
-                            <div className="flex justify-between items-center text-[10px]">
-                                <span className={reviewText.length < 20 ? "text-red-400" : "text-green-500"}>
-                                    {reviewText.length < 20 ? `${20 - reviewText.length} more characters needed` : "Good length!"}
-                                </span>
-                                <span className="text-gray-400">{reviewText.length} characters</span>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
-
-                {/* ── Review Photos ── */}
-                <Card className="mb-8 border-none shadow-premium">
-                    <CardHeader>
-                        <div className="flex items-center gap-2">
-                            <Camera className="h-5 w-5 text-uiuc-orange" />
-                            <CardTitle>Review Photos <span className="text-gray-400 font-normal text-sm">(Optional)</span></CardTitle>
-                        </div>
-                        <CardDescription>
-                            Add photos to back up your review — kitchen condition, damage, hallways, amenities. Upload to <a href="https://imgur.com" target="_blank" className="text-uiuc-orange underline">Imgur</a> or any image host and paste the URL here.
-                        </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        {reviewImageUrls.map((url, i) => (
-                            <div key={i} className="space-y-2">
-                                <div className="flex gap-2">
-                                    <Input
-                                        type="url"
-                                        placeholder={`https://i.imgur.com/example${i + 1}.jpg`}
-                                        value={url}
-                                        onChange={e => updateImageUrl(i, e.target.value)}
-                                        className="flex-1"
-                                    />
-                                    {reviewImageUrls.length > 1 && (
-                                        <button
-                                            type="button"
-                                            onClick={() => removeImageField(i)}
-                                            className="p-2 rounded-xl hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors"
-                                        >
-                                            <X className="h-4 w-4" />
-                                        </button>
-                                    )}
-                                </div>
-                                {url.trim() && (
-                                    <div className="rounded-2xl overflow-hidden border border-gray-100 h-40 bg-gray-50">
-                                        <img
-                                            src={url}
-                                            alt={`Review photo ${i + 1}`}
-                                            className="w-full h-full object-cover"
-                                            onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                
+                                {company === "Other" && (
+                                    <div className="space-y-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                                        <Label className="font-bold text-gray-700">Company Name</Label>
+                                        <Input
+                                            placeholder="Type the company name..."
+                                            className="h-12 bg-gray-50 border-none rounded-xl"
+                                            value={otherCompany}
+                                            onChange={e => setOtherCompany(e.target.value)}
                                         />
                                     </div>
                                 )}
                             </div>
-                        ))}
-                        {reviewImageUrls.length < 5 && (
-                            <button
-                                type="button"
-                                onClick={addImageField}
-                                className="flex items-center gap-2 text-sm font-bold text-uiuc-orange hover:text-uiuc-navy transition-colors"
-                            >
-                                <ImagePlus className="h-4 w-4" /> Add another photo
-                            </button>
-                        )}
-                    </CardContent>
-                    <CardFooter className="bg-gray-50/50 border-t flex justify-end gap-4 py-6 rounded-b-xl">
-                        <Button variant="ghost" type="button" onClick={() => router.back()}>Cancel</Button>
+                        </div>
+
+                         {/* ── Ratings ── */}
+                         <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-uiuc-orange p-2 rounded-lg text-white">
+                                    <Star className="h-5 w-5" />
+                                </div>
+                                <div>
+                                    <h2 className="text-xl font-black text-uiuc-navy uppercase tracking-tight">Student Ratings</h2>
+                                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Be honest and specific</p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-4">
+                                <StarRatingInput label="Management" value={ratings.management} onChange={v => setRatings({ ...ratings, management: v })} />
+                                <StarRatingInput label="Maintenance" value={ratings.maintenance} onChange={v => setRatings({ ...ratings, maintenance: v })} />
+                                <StarRatingInput label="Value for Money" value={ratings.value} onChange={v => setRatings({ ...ratings, value: v })} />
+                                <StarRatingInput label="Noise Level" value={ratings.noise} onChange={v => setRatings({ ...ratings, noise: v })} />
+                            </div>
+                        </div>
+
+                        {/* ── Written Review & Rent ── */}
+                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium">
+                             <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-green-500 p-2 rounded-lg text-white">
+                                    <Send className="h-4 w-4" />
+                                </div>
+                                <h2 className="text-xl font-black text-uiuc-navy uppercase tracking-tight">Experience & Rent</h2>
+                            </div>
+
+                            <div className="space-y-6">
+                                <div className="space-y-2">
+                                    <Label className="font-bold text-gray-700 text-xs uppercase tracking-wider">Monthly Rent You Paid (Optional)</Label>
+                                    <div className="relative">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 font-black text-gray-400">$</span>
+                                        <Input
+                                            type="number"
+                                            placeholder="e.g. 950"
+                                            className="h-12 bg-gray-50 border-none rounded-xl pl-8"
+                                            value={monthlyRent}
+                                            onChange={e => setMonthlyRent(e.target.value)}
+                                        />
+                                    </div>
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Total rent per person, per month.</p>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="font-bold text-gray-700">What should other students know? *</Label>
+                                    <Textarea
+                                        placeholder="Describe your experience — management response time, condition of the building, noise, internet..."
+                                        required
+                                        className="min-h-[200px] bg-gray-50 border-none rounded-xl p-4 resize-none"
+                                        value={reviewText}
+                                        onChange={e => setReviewText(e.target.value)}
+                                    />
+                                    <div className="flex justify-between items-center px-1">
+                                        <span className={reviewText.length < 20 ? "text-[10px] font-bold text-red-400 uppercase tracking-widest" : "text-[10px] font-bold text-green-500 uppercase tracking-widest"}>
+                                            {reviewText.length < 20 ? `${20 - reviewText.length} more characters needed` : "Review meets length requirements"}
+                                        </span>
+                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">{reviewText.length} chars</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── Building Photo (Optional) ── */}
+                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-blue-500 p-2 rounded-lg text-white">
+                                    <Building2 className="h-4 w-4" />
+                                </div>
+                                <h2 className="text-xl font-black text-uiuc-navy uppercase tracking-tight">Building Photo</h2>
+                            </div>
+                            <div className="space-y-3">
+                                <Label className="font-bold text-gray-700 text-xs uppercase tracking-wider">Image URL (Optional)</Label>
+                                <Input
+                                    type="url"
+                                    placeholder="https://example.com/building.jpg"
+                                    className="h-12 bg-gray-50 border-none rounded-xl"
+                                    value={buildingImageUrl}
+                                    onChange={e => setBuildingImageUrl(e.target.value)}
+                                />
+                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Paste an image link if the current building photo is missing or wrong.</p>
+                            </div>
+                        </div>
+
+                        {/* ── Review Photos ── */}
+                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="bg-purple-500 p-2 rounded-lg text-white">
+                                    <Camera className="h-4 w-4" />
+                                </div>
+                                <h2 className="text-xl font-black text-uiuc-navy uppercase tracking-tight">Review Gallery</h2>
+                            </div>
+                            
+                            {/* Paste Zone */}
+                            <div className="mb-8 p-10 border-4 border-dashed border-gray-100 rounded-[30px] bg-gray-50/50 flex flex-col items-center justify-center text-center gap-4 group hover:border-uiuc-orange/20 transition-colors">
+                                <div className="bg-white p-4 rounded-2xl shadow-sm text-gray-300 group-hover:text-uiuc-orange transition-colors">
+                                    <ImagePlus className="h-8 w-8" />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-black text-uiuc-navy uppercase tracking-tight">Paste Your Image</p>
+                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Press Control V to paste your image</p>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                {reviewImageUrls.map((url, i) => (
+                                    <div key={i} className="space-y-2">
+                                        <div className="flex gap-2">
+                                            <Input
+                                                type="url"
+                                                placeholder={`Photo URL #${i + 1} (or paste above)`}
+                                                className="h-12 bg-gray-50 border-none rounded-xl"
+                                                value={url}
+                                                onChange={e => updateReviewImage(i, e.target.value)}
+                                            />
+                                            {reviewImageUrls.length > 1 && (
+                                                <Button
+                                                    type="button"
+                                                    variant="ghost"
+                                                    onClick={() => removeReviewImage(i)}
+                                                    className="h-12 w-12 rounded-xl text-gray-400 hover:text-red-500"
+                                                >
+                                                    <X className="h-5 w-5" />
+                                                </Button>
+                                            )}
+                                        </div>
+                                        {url.trim() && (
+                                            <div className="rounded-2xl overflow-hidden border border-gray-100 h-40 bg-gray-50">
+                                                <img
+                                                    src={url}
+                                                    alt={`Review photo ${i + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                                />
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                                {reviewImageUrls.length < 5 && (
+                                    <button
+                                        type="button"
+                                        onClick={addReviewImage}
+                                        className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-uiuc-orange hover:text-uiuc-navy transition-colors mt-2"
+                                    >
+                                        <ImagePlus className="h-4 w-4" /> Add another photo
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+
                         <Button
                             type="submit"
                             disabled={submitting}
-                            className="bg-uiuc-navy hover:bg-uiuc-navy/90 text-white min-w-[140px] shadow-lg"
+                            className="w-full bg-uiuc-navy text-white h-20 rounded-3xl font-black uppercase text-xl tracking-tighter hover:bg-uiuc-navy/90 shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-50"
                         >
-                            {submitting ? "Saving..." : editReviewId ? "Save Changes" : "Submit My Review"}
+                            {submitting ? (
+                                <span className="flex items-center gap-3">
+                                    <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
+                                    Saving...
+                                </span>
+                            ) : (
+                                <span className="flex items-center gap-3">
+                                    {editReviewId ? "Update Review" : "Post My Review"} <CheckCircle className="h-6 w-6" />
+                                </span>
+                            )}
                         </Button>
-                    </CardFooter>
-                </Card>
-            </form>
+                    </form>
+                </div>
+
+                {/* Sidebar */}
+                <div className="w-full md:w-72 space-y-6 shrink-0">
+                    <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-premium text-center">
+                        <div className="bg-uiuc-navy p-4 rounded-3xl text-white inline-block mb-6">
+                            <ShieldAlert className="h-10 w-10" />
+                        </div>
+                        <h4 className="font-black text-uiuc-navy uppercase tracking-tight text-lg mb-2">Student Verification</h4>
+                        <p className="text-gray-500 text-xs font-medium leading-relaxed">
+                            Your <span className="font-bold text-uiuc-navy">@illinois.edu</span> account ensures every review is from a real UIUC student.
+                        </p>
+                    </div>
+
+                    <div className="p-8 bg-uiuc-orange/5 rounded-3xl border border-uiuc-orange/10 space-y-4">
+                        <div className="flex items-center gap-2">
+                            <CheckCircle className="h-4 w-4 text-uiuc-orange" />
+                            <h4 className="font-black text-uiuc-navy uppercase tracking-tighter text-sm">Review Guidelines</h4>
+                        </div>
+                        <ul className="text-[11px] text-gray-600 font-bold uppercase tracking-wider space-y-3 leading-loose">
+                            <li>• Must be a current/past tenant</li>
+                            <li>• No landlord interaction</li>
+                            <li>• One review per building</li>
+                            <li>• Honest, non-abusive content</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+    );
+}
+
+export default function WriteReviewPage({ params }: { params: Promise<{ slug: string }> }) {
+    const resolvedParams = use(params);
+    return (
+        <Suspense fallback={<div className="container mx-auto px-4 py-32 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-uiuc-navy" /></div>}>
+            <WriteReviewForm slug={resolvedParams.slug} />
+        </Suspense>
     );
 }

@@ -33,7 +33,15 @@ export default function Home() {
   useEffect(() => {
     async function loadData() {
       const _apts = await getApartments();
-      setApartments(_apts.slice(0, 6)); // Featured apartments
+      // Only show apartments with real images (not street view fallbacks)
+      // and explicitly hide any version of 202 E Chalmers from the main page.
+      const featured = _apts.filter(apt => {
+        const hasRealImage = apt.image_url && !apt.image_url.includes('google');
+        const isNotChalmers = !apt.name.toLowerCase().includes('202 e chalmers') && 
+                              !apt.address.toLowerCase().includes('202 e chalmers');
+        return hasRealImage && isNotChalmers;
+      });
+      setApartments(featured.slice(0, 10)); 
       setLoading(false);
     }
     loadData();

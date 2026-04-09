@@ -21,7 +21,7 @@ export default function ProfilePage() {
     useEffect(() => {
         async function load() {
             if (user) {
-                const favs = await getFavorites(user.id);
+                const favs = await getFavorites();
                 setFavorites(favs);
                 const stored = getUserById(user.id);
                 if (stored) {

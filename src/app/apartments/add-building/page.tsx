@@ -11,32 +11,8 @@ import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Building2, Star, Send, ShieldCheck, ArrowLeft, CheckCircle, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { addBuilding, addReview } from "@/lib/api";
+import { StarRatingInput } from "@/components/star-rating-input";
 
-function StarRatingInput({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
-    const [hovered, setHovered] = useState(0);
-    return (
-        <div className="space-y-2">
-            <Label className="font-bold text-gray-700 text-xs uppercase tracking-wider">{label}</Label>
-            <div className="flex gap-2">
-                {[1, 2, 3, 4, 5].map(s => (
-                    <button
-                        key={s}
-                        type="button"
-                        onClick={() => onChange(s)}
-                        onMouseEnter={() => setHovered(s)}
-                        onMouseLeave={() => setHovered(0)}
-                        className={`h-11 w-11 rounded-xl flex items-center justify-center transition-all ${
-                            (hovered || value) >= s ? 'bg-uiuc-orange text-white scale-110' : 'bg-gray-50 text-gray-300 hover:bg-gray-100'
-                        }`}
-                    >
-                        <Star className={`h-5 w-5 ${(hovered || value) >= s ? 'fill-current' : ''}`} />
-                    </button>
-                ))}
-                {value > 0 && <span className="self-center ml-2 text-xs font-black text-gray-400 uppercase tracking-widest">{['','Poor','Fair','Good','Great','Excellent'][value]}</span>}
-            </div>
-        </div>
-    );
-}
 
 function AddBuildingForm() {
     const router = useRouter();

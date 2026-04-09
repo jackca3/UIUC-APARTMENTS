@@ -55,8 +55,10 @@ export function updateBuilding(apt: Apartment): void {
     const idx = buildings.findIndex(b => b.id === apt.id);
     if (idx !== -1) {
         buildings[idx] = apt;
-        saveUserBuildings(buildings);
+    } else {
+        buildings.push(apt);
     }
+    saveUserBuildings(buildings);
 }
 
 /** Add a new review to the store */

@@ -155,20 +155,17 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                     </div>
                 </div>
 
-                {/* Main Visual */}
-                <div className="rounded-[60px] overflow-hidden aspect-[21/9] mb-24 shadow-premium group relative bg-gray-100 border-8 border-white">
-                    <img
-                        src={imageUrl}
-                        alt={apartment.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    {!apartment.image_url && (
-                        <Badge className="absolute top-8 right-8 bg-black/60 backdrop-blur-xl text-white font-black uppercase tracking-widest text-[10px] px-6 py-2 border-none">
-                            Street View Fallback
-                        </Badge>
-                    )}
-                </div>
+                {/* Main Visual - Only show if a real photo has been provided */}
+                {apartment.image_url && (
+                    <div className="rounded-[60px] overflow-hidden aspect-[21/9] mb-24 shadow-premium group relative bg-gray-100 border-8 border-white">
+                        <img
+                            src={apartment.image_url}
+                            alt={apartment.name}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2000ms]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                    </div>
+                )}
 
                 {/* Content Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">

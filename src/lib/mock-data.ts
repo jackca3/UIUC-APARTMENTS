@@ -2,6 +2,182 @@ import { Apartment, ReviewWithAuthor } from './types';
 
 export const mockApartments: Apartment[] = [
     {
+        "id": "a999",
+        "name": "202 E Chalmers",
+        "slug": "202-e-chalmers-202",
+        "address": "202 E Chalmers St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "202 E Chalmers offers convenient student housing located close to the UIUC campus.",
+        "latitude": 40.1065,
+        "longitude": -88.2333,
+        "management_company": "Independent",
+        "official_website": null,
+        "image_url": "/apartments/202_e_chalmers.png",
+        "created_at": "2026-04-09T07:43:00.844Z"
+    },
+    {
+        "id": "feat1",
+        "name": "The Dean Campustown",
+        "slug": "the-dean-campustown",
+        "address": "708 S 6th St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "The Dean offers premium student living with a rooftop pool, modern amenities, and prime location steps from Greek life and Green Street.",
+        "latitude": 40.1111,
+        "longitude": -88.2307,
+        "management_company": "Core Spaces",
+        "official_website": "https://thedean.com",
+        "image_url": "/apartments/the_dean.jpg",
+        "created_at": "2026-04-09T07:26:25.032Z"
+    },
+    {
+        "id": "feat2",
+        "name": "Seven07",
+        "slug": "seven07",
+        "address": "707 S 3rd St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Seven07 offers luxury high-rise living with a gym, outdoor pool, and spectacular views of the UIUC campus.",
+        "latitude": 40.1114,
+        "longitude": -88.2373,
+        "management_company": "Greystar",
+        "official_website": "https://seven07.com",
+        "image_url": "/apartments/seven07.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat3",
+        "name": "212 East",
+        "slug": "212-east",
+        "address": "212 E Green St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "212 East is a premier residential building located in the heart of Green street, offering fully furnished apartments.",
+        "latitude": 40.1102,
+        "longitude": -88.2355,
+        "management_company": "Green Street Realty",
+        "official_website": null,
+        "image_url": "/apartments/212_east.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat4",
+        "name": "Latitude",
+        "slug": "latitude",
+        "address": "608 E University Ave",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Latitude features luxury student apartments close to the engineering quad, with study spaces, a pool, and high-end fitness center.",
+        "latitude": 40.1167,
+        "longitude": -88.2286,
+        "management_company": "Peak Campus",
+        "official_website": null,
+        "image_url": "/apartments/latitude.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat5",
+        "name": "Hub Champaign-Daniel",
+        "slug": "hub-champaign-daniel",
+        "address": "616 E Daniel St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Hub Champaign Daniel offers fully furnished student apartments with luxury amenities including a spa, sauna, and resort-style pool.",
+        "latitude": 40.1098,
+        "longitude": -88.2295,
+        "management_company": "Core Spaces",
+        "official_website": null,
+        "image_url": "/apartments/the_hub.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat6",
+        "name": "HERE Champaign",
+        "slug": "here-champaign",
+        "address": "308 E Green St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "HERE offers luxury student apartments featuring automated parking, bowling alley, and an expansive rooftop terrace.",
+        "latitude": 40.1105,
+        "longitude": -88.2325,
+        "management_company": "CA Ventures",
+        "official_website": null,
+        "image_url": "/apartments/here.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat7",
+        "name": "Burnham 310",
+        "slug": "burnham-310",
+        "address": "310 E Springfield Ave",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Burnham 310 features unique apartment layouts, a private dog park, grocery store on ground floor, and fitness center.",
+        "latitude": 40.1122,
+        "longitude": -88.233,
+        "management_company": "The Scion Group",
+        "official_website": null,
+        "image_url": "/apartments/burnham_310.jpg",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat8",
+        "name": "Campus Circle",
+        "slug": "campus-circle",
+        "address": "1010 W University Ave",
+        "city": "Urbana",
+        "state": "IL",
+        "zip": "61801",
+        "description": "Campus Circle provides an exceptional student living experience just steps from the engineering campus.",
+        "latitude": 40.116,
+        "longitude": -88.223,
+        "management_company": "Peak Campus",
+        "official_website": null,
+        "image_url": "/apartments/campus_circle.png",
+        "created_at": "2026-04-09T07:26:25.046Z"
+    },
+    {
+        "id": "feat9",
+        "name": "Octave Apartments",
+        "slug": "octave-apartments",
+        "address": "210 E John St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Octave offers stylish and contemporary student apartments located just blocks from the Main Quad.",
+        "latitude": 40.1085,
+        "longitude": -88.236,
+        "management_company": "Lincoln Property Company",
+        "official_website": null,
+        "image_url": "/apartments/octave.jpg",
+        "created_at": "2026-04-09T07:26:25.047Z"
+    },
+    {
+        "id": "feat10",
+        "name": "Tower at Third",
+        "slug": "tower-at-third",
+        "address": "302 E John St",
+        "city": "Champaign",
+        "state": "IL",
+        "zip": "61820",
+        "description": "Tower at Third offers renovated high-rise living with sweeping views of the entire university.",
+        "latitude": 40.1086,
+        "longitude": -88.233,
+        "management_company": "American Campus Communities",
+        "official_website": null,
+        "image_url": "/apartments/tower_at_third.jpg",
+        "created_at": "2026-04-09T07:26:25.047Z"
+    },
+    {
         "id": "a1",
         "name": "309 E Green",
         "slug": "309-e-green-309",
@@ -1923,4 +2099,2494 @@ export const mockApartments: Apartment[] = [
     }
 ];
 
-export const mockReviews: ReviewWithAuthor[] = [];
+export const mockReviews: ReviewWithAuthor[] = [
+    {
+        "id": "rev-mock-1775744583335",
+        "apartment_id": "a999",
+        "user_id": "user-746",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 774,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-02-06T06:10:10.441Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583336",
+        "apartment_id": "feat1",
+        "user_id": "user-475",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 996,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2025-12-25T16:00:40.521Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583337",
+        "apartment_id": "feat2",
+        "user_id": "user-615",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 680,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-01-28T18:10:38.488Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583338",
+        "apartment_id": "feat3",
+        "user_id": "user-766",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 865,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-02-03T12:29:32.531Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583339",
+        "apartment_id": "feat4",
+        "user_id": "user-337",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 841,
+        "written_review": "Heating is included which is great for the brutal winters here. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-02-15T09:18:29.211Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583340",
+        "apartment_id": "feat5",
+        "user_id": "user-707",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 644,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2026-03-20T04:30:19.726Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583341",
+        "apartment_id": "feat6",
+        "user_id": "user-627",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 694,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-02-08T13:45:53.276Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583342",
+        "apartment_id": "feat7",
+        "user_id": "user-417",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 760,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2025-12-25T19:28:43.676Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583343",
+        "apartment_id": "feat8",
+        "user_id": "user-492",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 741,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-01-07T21:36:40.237Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583344",
+        "apartment_id": "feat9",
+        "user_id": "user-412",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 647,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-02-18T20:45:59.406Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583345",
+        "apartment_id": "feat10",
+        "user_id": "user-756",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 623,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-02-08T22:06:31.179Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583346",
+        "apartment_id": "a1",
+        "user_id": "user-741",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 914,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-01-09T23:35:30.741Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583347",
+        "apartment_id": "a2",
+        "user_id": "user-756",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 982,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Right next to the bus stop, making getting to the engineering quad really easy.",
+        "image_urls": [],
+        "created_at": "2026-02-23T16:52:56.969Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583348",
+        "apartment_id": "a3",
+        "user_id": "user-656",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 612,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-04-06T16:38:06.473Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583349",
+        "apartment_id": "a4",
+        "user_id": "user-788",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 671,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-01-05T18:43:21.164Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583350",
+        "apartment_id": "a5",
+        "user_id": "user-948",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 730,
+        "written_review": "Heating is included which is great for the brutal winters here. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-01-28T19:30:28.578Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583351",
+        "apartment_id": "a6",
+        "user_id": "user-285",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 888,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2026-02-17T09:19:41.031Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583352",
+        "apartment_id": "a7",
+        "user_id": "user-597",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 712,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-01-03T19:17:22.081Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583353",
+        "apartment_id": "a8",
+        "user_id": "user-873",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 814,
+        "written_review": "Heating is included which is great for the brutal winters here. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-03-02T00:15:22.169Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583354",
+        "apartment_id": "a9",
+        "user_id": "user-916",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 926,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-02-16T20:28:52.171Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583355",
+        "apartment_id": "a10",
+        "user_id": "user-109",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 912,
+        "written_review": "Heating is included which is great for the brutal winters here. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-03-22T07:39:07.347Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583356",
+        "apartment_id": "a11",
+        "user_id": "user-164",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 630,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-02-14T00:22:43.374Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583357",
+        "apartment_id": "a12",
+        "user_id": "user-982",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 672,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2025-12-29T12:48:16.319Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583358",
+        "apartment_id": "a13",
+        "user_id": "user-173",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 799,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2025-12-15T12:59:15.693Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583359",
+        "apartment_id": "a14",
+        "user_id": "user-470",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 871,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. Right next to the bus stop, making getting to the engineering quad really easy.",
+        "image_urls": [],
+        "created_at": "2026-03-14T18:21:00.715Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583360",
+        "apartment_id": "a15",
+        "user_id": "user-252",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 710,
+        "written_review": "Heating is included which is great for the brutal winters here. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-01-11T17:12:49.255Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583361",
+        "apartment_id": "a16",
+        "user_id": "user-425",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 977,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-02-16T21:38:17.805Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583362",
+        "apartment_id": "a17",
+        "user_id": "user-880",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 910,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-03-21T18:01:48.974Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583363",
+        "apartment_id": "a18",
+        "user_id": "user-649",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 748,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-03-14T07:22:03.317Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583364",
+        "apartment_id": "a19",
+        "user_id": "user-980",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 761,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-03-11T02:17:18.787Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583365",
+        "apartment_id": "a20",
+        "user_id": "user-220",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 708,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-03-30T15:37:02.328Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583366",
+        "apartment_id": "a21",
+        "user_id": "user-995",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 830,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-01-19T21:18:33.158Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583367",
+        "apartment_id": "a22",
+        "user_id": "user-314",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 935,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2025-12-28T16:29:35.416Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583368",
+        "apartment_id": "a23",
+        "user_id": "user-314",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 729,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-02-16T15:16:52.356Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583369",
+        "apartment_id": "a24",
+        "user_id": "user-741",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 616,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2025-12-15T18:50:44.629Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583370",
+        "apartment_id": "a25",
+        "user_id": "user-561",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 745,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-02-26T18:42:16.560Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583371",
+        "apartment_id": "a26",
+        "user_id": "user-649",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 698,
+        "written_review": "Heating is included which is great for the brutal winters here. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2026-02-23T19:08:21.229Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583372",
+        "apartment_id": "a27",
+        "user_id": "user-133",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 620,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-02-11T18:24:27.497Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583373",
+        "apartment_id": "a28",
+        "user_id": "user-909",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 959,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-01-26T19:00:27.883Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583374",
+        "apartment_id": "a29",
+        "user_id": "user-356",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 780,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-02-16T15:55:50.732Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583375",
+        "apartment_id": "a30",
+        "user_id": "user-549",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 623,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2025-12-30T16:22:46.989Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583376",
+        "apartment_id": "a31",
+        "user_id": "user-379",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 813,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-04-04T04:15:54.354Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583377",
+        "apartment_id": "a32",
+        "user_id": "user-292",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 663,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2025-12-26T06:57:52.297Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583378",
+        "apartment_id": "a33",
+        "user_id": "user-295",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 929,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-04-02T01:00:46.304Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583379",
+        "apartment_id": "a34",
+        "user_id": "user-760",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 773,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-03-14T03:32:51.738Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583380",
+        "apartment_id": "a35",
+        "user_id": "user-47",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 716,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-03-13T14:09:42.937Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583381",
+        "apartment_id": "a36",
+        "user_id": "user-88",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 897,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-04-03T20:30:17.410Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583382",
+        "apartment_id": "a37",
+        "user_id": "user-815",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 801,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2025-12-19T09:58:36.827Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583383",
+        "apartment_id": "a38",
+        "user_id": "user-527",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 746,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-03-15T02:21:10.524Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583384",
+        "apartment_id": "a39",
+        "user_id": "user-559",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 723,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-01-06T09:58:45.718Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583385",
+        "apartment_id": "a40",
+        "user_id": "user-348",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 676,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-03-20T08:02:30.242Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583386",
+        "apartment_id": "a41",
+        "user_id": "user-468",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 625,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-01-15T11:48:50.983Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583387",
+        "apartment_id": "a42",
+        "user_id": "user-81",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 673,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2025-12-23T09:55:20.118Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583388",
+        "apartment_id": "a43",
+        "user_id": "user-843",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 664,
+        "written_review": "Heating is included which is great for the brutal winters here. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-02-05T22:21:59.376Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583389",
+        "apartment_id": "a44",
+        "user_id": "user-360",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 630,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2025-12-29T12:35:57.505Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583390",
+        "apartment_id": "a45",
+        "user_id": "user-148",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 851,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-01-24T14:47:39.739Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583391",
+        "apartment_id": "a46",
+        "user_id": "user-922",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 873,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-02-15T20:02:06.627Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583392",
+        "apartment_id": "a47",
+        "user_id": "user-832",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 933,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-02-13T05:06:46.533Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583393",
+        "apartment_id": "a48",
+        "user_id": "user-172",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 954,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-03-06T19:29:34.201Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583394",
+        "apartment_id": "a49",
+        "user_id": "user-709",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 960,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-03-29T16:09:49.479Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583395",
+        "apartment_id": "a50",
+        "user_id": "user-551",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 645,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-02-08T07:15:01.112Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583396",
+        "apartment_id": "a51",
+        "user_id": "user-921",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 973,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-01-23T01:40:06.887Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583397",
+        "apartment_id": "a52",
+        "user_id": "user-540",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 683,
+        "written_review": "Heating is included which is great for the brutal winters here. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-01-20T13:16:49.820Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583398",
+        "apartment_id": "a53",
+        "user_id": "user-555",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 604,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-01-23T18:38:15.750Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583399",
+        "apartment_id": "a54",
+        "user_id": "user-57",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 738,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-02-12T10:56:08.416Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583400",
+        "apartment_id": "a55",
+        "user_id": "user-675",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 817,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2025-12-21T06:09:05.165Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583401",
+        "apartment_id": "a56",
+        "user_id": "user-83",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 713,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-03-09T07:25:27.729Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583402",
+        "apartment_id": "a57",
+        "user_id": "user-603",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 928,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-01-20T22:53:52.104Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583403",
+        "apartment_id": "a58",
+        "user_id": "user-167",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 613,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-03-28T15:29:17.790Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583404",
+        "apartment_id": "a59",
+        "user_id": "user-142",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 872,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2025-12-21T12:55:07.878Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583405",
+        "apartment_id": "a60",
+        "user_id": "user-798",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 867,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-01-01T03:49:37.974Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583406",
+        "apartment_id": "a61",
+        "user_id": "user-511",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 697,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-02-12T13:08:52.020Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583407",
+        "apartment_id": "a62",
+        "user_id": "user-978",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 906,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-03-28T04:02:26.748Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583408",
+        "apartment_id": "a63",
+        "user_id": "user-78",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 876,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-03-14T08:47:45.019Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583409",
+        "apartment_id": "a64",
+        "user_id": "user-926",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 615,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-01-06T19:16:22.145Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583410",
+        "apartment_id": "a65",
+        "user_id": "user-660",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 915,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2026-02-09T21:56:21.749Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583411",
+        "apartment_id": "a66",
+        "user_id": "user-536",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 844,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2025-12-25T13:27:13.270Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583412",
+        "apartment_id": "a67",
+        "user_id": "user-344",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 832,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-03-01T19:13:21.621Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583413",
+        "apartment_id": "a68",
+        "user_id": "user-672",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 910,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-01-11T19:33:15.850Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583414",
+        "apartment_id": "a69",
+        "user_id": "user-891",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 695,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-02-24T15:14:27.330Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583415",
+        "apartment_id": "a70",
+        "user_id": "user-442",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 934,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-01-11T20:40:03.084Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583416",
+        "apartment_id": "a71",
+        "user_id": "user-59",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 835,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-01-03T18:44:46.068Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583417",
+        "apartment_id": "a72",
+        "user_id": "user-43",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 706,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2025-12-18T15:12:15.164Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583418",
+        "apartment_id": "a73",
+        "user_id": "user-255",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 914,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-02-21T21:24:40.924Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583419",
+        "apartment_id": "a74",
+        "user_id": "user-63",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 978,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2025-12-30T21:35:48.666Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583420",
+        "apartment_id": "a75",
+        "user_id": "user-210",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 722,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-03-14T15:42:04.368Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583421",
+        "apartment_id": "a76",
+        "user_id": "user-633",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 992,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-03-06T11:45:41.194Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583422",
+        "apartment_id": "a77",
+        "user_id": "user-605",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 617,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-03-31T19:39:46.502Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583423",
+        "apartment_id": "a78",
+        "user_id": "user-548",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 887,
+        "written_review": "Heating is included which is great for the brutal winters here. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2025-12-30T09:35:19.460Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583424",
+        "apartment_id": "a79",
+        "user_id": "user-117",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 828,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-01-02T13:57:11.028Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583425",
+        "apartment_id": "a80",
+        "user_id": "user-486",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 825,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-03-22T04:54:01.642Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583426",
+        "apartment_id": "a81",
+        "user_id": "user-414",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 889,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2025-12-21T02:52:52.297Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583427",
+        "apartment_id": "a82",
+        "user_id": "user-77",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 771,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-02-14T14:08:22.430Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583428",
+        "apartment_id": "a83",
+        "user_id": "user-443",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 969,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-02-13T22:39:34.082Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583429",
+        "apartment_id": "a84",
+        "user_id": "user-167",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 781,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2025-12-23T18:11:19.097Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583430",
+        "apartment_id": "a85",
+        "user_id": "user-425",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 618,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-01-01T22:15:07.281Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583431",
+        "apartment_id": "a86",
+        "user_id": "user-19",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 999,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-03-11T07:18:00.647Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583432",
+        "apartment_id": "a87",
+        "user_id": "user-872",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 659,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2025-12-29T06:45:28.181Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583433",
+        "apartment_id": "a88",
+        "user_id": "user-971",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 692,
+        "written_review": "Honestly, for campustown, it's pretty clean and well-kept. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-01-11T16:54:39.556Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583434",
+        "apartment_id": "a89",
+        "user_id": "user-350",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 811,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2025-12-28T09:57:44.166Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583435",
+        "apartment_id": "a90",
+        "user_id": "user-142",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 606,
+        "written_review": "Maintenance guys are super friendly and fixed our dishwasher quickly. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2025-12-30T16:35:42.864Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583436",
+        "apartment_id": "a91",
+        "user_id": "user-928",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 649,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-03-18T02:29:20.220Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583437",
+        "apartment_id": "a92",
+        "user_id": "user-654",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 624,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-02-04T17:33:09.664Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583438",
+        "apartment_id": "a93",
+        "user_id": "user-241",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 722,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-04-07T08:13:39.825Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583439",
+        "apartment_id": "a94",
+        "user_id": "user-218",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 928,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-03-24T08:27:17.574Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583440",
+        "apartment_id": "a95",
+        "user_id": "user-918",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 612,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-01-04T03:15:58.659Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583441",
+        "apartment_id": "a96",
+        "user_id": "user-804",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 763,
+        "written_review": "Heating is included which is great for the brutal winters here. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2025-12-22T03:12:36.511Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583442",
+        "apartment_id": "a97",
+        "user_id": "user-542",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 613,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-03-18T08:21:25.618Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583443",
+        "apartment_id": "a98",
+        "user_id": "user-860",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 845,
+        "written_review": "The location is decent for the price, but the walls are a bit thin. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-03-30T01:49:39.858Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583444",
+        "apartment_id": "a99",
+        "user_id": "user-460",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 771,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-03-18T09:53:01.689Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583445",
+        "apartment_id": "a100",
+        "user_id": "user-440",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 993,
+        "written_review": "Packages sometimes get left in the lobby, but I've never lost anything. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-03-21T07:16:29.870Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583446",
+        "apartment_id": "a101",
+        "user_id": "user-784",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 861,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2026-01-07T12:49:51.394Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583447",
+        "apartment_id": "a102",
+        "user_id": "user-361",
+        "management_rating": 4,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 727,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Maintenance guys are super friendly and fixed our dishwasher quickly.",
+        "image_urls": [],
+        "created_at": "2026-02-25T22:44:45.575Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583448",
+        "apartment_id": "a103",
+        "user_id": "user-426",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 671,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-01-31T17:46:06.243Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583449",
+        "apartment_id": "a104",
+        "user_id": "user-488",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 922,
+        "written_review": "I haven't had any major issues, but you can definitely hear your upstairs neighbor walking. I haven't had any major issues, but you can definitely hear your upstairs neighbor walking.",
+        "image_urls": [],
+        "created_at": "2026-03-05T18:21:13.375Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583450",
+        "apartment_id": "a105",
+        "user_id": "user-928",
+        "management_rating": 3,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 707,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-03-21T16:36:04.243Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583451",
+        "apartment_id": "a106",
+        "user_id": "user-758",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 611,
+        "written_review": "Right next to the bus stop, making getting to the engineering quad really easy. Heating is included which is great for the brutal winters here.",
+        "image_urls": [],
+        "created_at": "2026-01-26T21:51:53.248Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583452",
+        "apartment_id": "a107",
+        "user_id": "user-259",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 877,
+        "written_review": "Heating is included which is great for the brutal winters here. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2025-12-21T18:31:38.886Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583453",
+        "apartment_id": "a108",
+        "user_id": "user-54",
+        "management_rating": 4,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 3,
+        "monthly_rent_paid": 899,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-02-15T03:45:27.076Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583454",
+        "apartment_id": "a109",
+        "user_id": "user-346",
+        "management_rating": 5,
+        "maintenance_rating": 5,
+        "value_rating": 4,
+        "noise_rating": 4,
+        "monthly_rent_paid": 967,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. Kitchen appliances are a bit older, but totally functional.",
+        "image_urls": [],
+        "created_at": "2026-03-14T11:09:36.777Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583455",
+        "apartment_id": "a110",
+        "user_id": "user-393",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 813,
+        "written_review": "It's a typical campus apartment—nothing luxurious, but gets the job done. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-02-05T01:58:04.838Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583456",
+        "apartment_id": "a111",
+        "user_id": "user-2",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 4,
+        "noise_rating": 3,
+        "monthly_rent_paid": 979,
+        "written_review": "It's a solid place to live, fairly quiet on weekdays but noisy on weekends. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2025-12-23T00:22:52.967Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583457",
+        "apartment_id": "a112",
+        "user_id": "user-957",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 753,
+        "written_review": "Heating is included which is great for the brutal winters here. It's a solid place to live, fairly quiet on weekdays but noisy on weekends.",
+        "image_urls": [],
+        "created_at": "2026-03-12T22:27:16.320Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583458",
+        "apartment_id": "a113",
+        "user_id": "user-20",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 628,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. The bedrooms are spacious, though the living room is a bit cramped for four people.",
+        "image_urls": [],
+        "created_at": "2026-01-06T02:16:18.046Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583459",
+        "apartment_id": "a114",
+        "user_id": "user-379",
+        "management_rating": 4,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 3,
+        "monthly_rent_paid": 665,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Amenities are okay, but the internet can be spotty during peak hours.",
+        "image_urls": [],
+        "created_at": "2025-12-19T16:50:51.524Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583460",
+        "apartment_id": "a115",
+        "user_id": "user-896",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 4,
+        "noise_rating": 5,
+        "monthly_rent_paid": 990,
+        "written_review": "Amenities are okay, but the internet can be spotty during peak hours. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-01-12T16:41:05.869Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583461",
+        "apartment_id": "a116",
+        "user_id": "user-666",
+        "management_rating": 3,
+        "maintenance_rating": 5,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 904,
+        "written_review": "The bedrooms are spacious, though the living room is a bit cramped for four people. Management responds to maintenance requests within a day, which is nice.",
+        "image_urls": [],
+        "created_at": "2026-02-18T19:20:20.261Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583462",
+        "apartment_id": "a117",
+        "user_id": "user-738",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 5,
+        "noise_rating": 4,
+        "monthly_rent_paid": 976,
+        "written_review": "Kitchen appliances are a bit older, but totally functional. It's a typical campus apartment—nothing luxurious, but gets the job done.",
+        "image_urls": [],
+        "created_at": "2026-01-21T16:23:05.548Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583463",
+        "apartment_id": "a118",
+        "user_id": "user-164",
+        "management_rating": 5,
+        "maintenance_rating": 4,
+        "value_rating": 3,
+        "noise_rating": 5,
+        "monthly_rent_paid": 695,
+        "written_review": "Management responds to maintenance requests within a day, which is nice. Packages sometimes get left in the lobby, but I've never lost anything.",
+        "image_urls": [],
+        "created_at": "2026-03-09T06:44:31.003Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583464",
+        "apartment_id": "a119",
+        "user_id": "user-1",
+        "management_rating": 3,
+        "maintenance_rating": 3,
+        "value_rating": 5,
+        "noise_rating": 5,
+        "monthly_rent_paid": 787,
+        "written_review": "Heating is included which is great for the brutal winters here. The location is decent for the price, but the walls are a bit thin.",
+        "image_urls": [],
+        "created_at": "2026-01-05T03:30:50.986Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    },
+    {
+        "id": "rev-mock-1775744583465",
+        "apartment_id": "a120",
+        "user_id": "user-34",
+        "management_rating": 5,
+        "maintenance_rating": 3,
+        "value_rating": 3,
+        "noise_rating": 4,
+        "monthly_rent_paid": 670,
+        "written_review": "Heating is included which is great for the brutal winters here. Honestly, for campustown, it's pretty clean and well-kept.",
+        "image_urls": [],
+        "created_at": "2026-02-10T06:56:20.704Z",
+        "profile": {
+            "first_name": "Illini Student",
+            "last_name": null,
+            "is_verified": true
+        },
+        "comments": []
+    }
+];
