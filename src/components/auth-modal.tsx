@@ -22,7 +22,7 @@ export function AuthModal() {
 
     // Signup state
     const [email, setEmail] = useState("");
-    const [generatedCode, setGeneratedCode] = useState<string | null>(null);
+    const [verificationToken, setVerificationToken] = useState<string | null>(null);
     const [enteredCode, setEnteredCode] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -41,7 +41,7 @@ export function AuthModal() {
     const reset = () => {
         setTab("signup");
         setSignupStep(1);
-        setEmail(""); setGeneratedCode(null); setEnteredCode("");
+        setEmail(""); setVerificationToken(null); setEnteredCode("");
         setUsername(""); setPassword(""); setError("");
         setLoginIdentifier(""); setLoginPassword("");
     };
@@ -66,6 +66,7 @@ export function AuthModal() {
             });
             const data = await res.json();
             if (!res.ok) { setError(data.error || "Failed to send code."); setLoading(false); return; }
+            setVerificationToken(data.verificationToken ?? null);
             setLoading(false);
             setSignupStep(2);
         } catch {
@@ -77,12 +78,16 @@ export function AuthModal() {
     const handleVerifyCode = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
+        if (!verificationToken) {
+            setError("Verification session expired. Please request a new code.");
+            return;
+        }
         setLoading(true);
         try {
             const res = await fetch("/api/verify-code", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, code: enteredCode }),
+                body: JSON.stringify({ email, code: enteredCode, verificationToken }),
             });
             const data = await res.json();
             if (!res.ok) { setError(data.error || "Invalid code."); setLoading(false); return; }
@@ -252,7 +257,7 @@ export function AuthModal() {
                                     <Button type="submit" className="w-full h-12 bg-uiuc-navy hover:bg-uiuc-navy/90 text-white rounded-2xl font-black uppercase tracking-widest">
                                         Verify Code →
                                     </Button>
-                                    <button type="button" onClick={() => { setSignupStep(1); setGeneratedCode(null); setError(""); }}
+                                    <button type="button" onClick={() => { setSignupStep(1); setVerificationToken(null); setError(""); }}
                                         className="w-full text-xs font-black text-gray-400 hover:text-uiuc-orange uppercase tracking-widest transition-colors">
                                         ← Change Email
                                     </button>

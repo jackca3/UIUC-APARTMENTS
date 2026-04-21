@@ -15,6 +15,7 @@ import { useAuth } from "@/contexts/auth-context";
 function SignupContent() {
     const [step, setStep] = useState(1);
     const [email, setEmail] = useState("");
+    const [verificationToken, setVerificationToken] = useState("");
     const [code, setCode] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -42,6 +43,7 @@ function SignupContent() {
                 setLoading(false);
                 return;
             }
+            setVerificationToken(data.verificationToken ?? "");
             toast.success("Verification code sent to " + email);
             setStep(2);
         } catch {
@@ -53,12 +55,16 @@ function SignupContent() {
 
     const handleVerifyCode = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!verificationToken) {
+            toast.error("Verification session expired. Please request a new code.");
+            return;
+        }
         setLoading(true);
         try {
             const res = await fetch("/api/verify-code", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, code }),
+                body: JSON.stringify({ email, code, verificationToken }),
             });
             const data = await res.json();
             if (!res.ok) {
@@ -159,7 +165,7 @@ function SignupContent() {
                             <Button type="submit" disabled={loading} className="w-full bg-uiuc-navy hover:bg-black text-white h-14 rounded-2xl text-lg font-black uppercase tracking-widest shadow-lg transition-transform hover:scale-[1.02]">
                                 {loading ? "Verifying..." : "Verify Code"}
                             </Button>
-                            <button type="button" onClick={() => setStep(1)} className="w-full text-xs font-black uppercase tracking-widest text-uiuc-orange hover:underline text-center">Change Email</button>
+                            <button type="button" onClick={() => { setStep(1); setVerificationToken(""); }} className="w-full text-xs font-black uppercase tracking-widest text-uiuc-orange hover:underline text-center">Change Email</button>
                         </form>
                     )}
 

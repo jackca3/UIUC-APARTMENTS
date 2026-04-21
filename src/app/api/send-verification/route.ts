@@ -1,12 +1,56 @@
+import { createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// ---------- In-memory code store ----------
-// (Persists within a single Node.js process; fine for dev + single-server prod)
-const codeStore = new Map<string, { code: string; expiresAt: number }>();
-
 function randomCode(): string {
     return Math.floor(100000 + Math.random() * 900000).toString();
+}
+
+function getVerificationSecret(): string {
+    const secret =
+        process.env.EMAIL_VERIFICATION_SECRET ||
+        process.env.NEXTAUTH_SECRET ||
+        process.env.SMTP_PASS;
+
+    if (secret) return secret;
+    if (process.env.NODE_ENV !== 'production') return 'dev-only-email-verification-secret';
+
+    throw new Error('Missing EMAIL_VERIFICATION_SECRET for email verification.');
+}
+
+function signPayload(payload: string): string {
+    return createHmac('sha256', getVerificationSecret()).update(payload).digest('hex');
+}
+
+function encodeVerificationToken(email: string, code: string, expiresAt: number): string {
+    const payload = `${email.toLowerCase()}|${code}|${expiresAt}`;
+    const signature = signPayload(payload);
+    return Buffer.from(`${payload}|${signature}`, 'utf8').toString('base64url');
+}
+
+export function decodeVerificationToken(token: string): { email: string; code: string; expiresAt: number } | null {
+    try {
+        const decoded = Buffer.from(token, 'base64url').toString('utf8');
+        const [email, code, expiresAtRaw, signature] = decoded.split('|');
+
+        if (!email || !code || !expiresAtRaw || !signature) return null;
+
+        const payload = `${email.toLowerCase()}|${code}|${expiresAtRaw}`;
+        const expectedSignature = signPayload(payload);
+        const provided = Buffer.from(signature, 'utf8');
+        const expected = Buffer.from(expectedSignature, 'utf8');
+
+        if (provided.length !== expected.length || !timingSafeEqual(provided, expected)) {
+            return null;
+        }
+
+        const expiresAt = Number(expiresAtRaw);
+        if (!Number.isFinite(expiresAt)) return null;
+
+        return { email: email.toLowerCase(), code, expiresAt };
+    } catch {
+        return null;
+    }
 }
 
 // ---------- Nodemailer transporter ----------
@@ -42,12 +86,9 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // Generate and store code (10 minute expiry)
         const code = randomCode();
-        codeStore.set(email.toLowerCase(), {
-            code,
-            expiresAt: Date.now() + 10 * 60 * 1000,
-        });
+        const expiresAt = Date.now() + 10 * 60 * 1000;
+        const verificationToken = encodeVerificationToken(email, code, expiresAt);
 
         const transporter = createTransporter();
 
@@ -57,6 +98,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({
                 ok: true,
                 dev: true,
+                verificationToken,
                 message: 'SMTP not configured. Check the server console for the code.',
             });
         }
@@ -90,12 +132,9 @@ export async function POST(req: NextRequest) {
             `,
         });
 
-        return NextResponse.json({ ok: true });
+        return NextResponse.json({ ok: true, verificationToken });
     } catch (err) {
         console.error('[Apt.ly] Email send error:', err);
         return NextResponse.json({ error: 'Failed to send email. Please try again.' }, { status: 500 });
     }
 }
-
-// Verification endpoint — also exported from this file to share the codeStore
-export { codeStore };
