@@ -36,6 +36,32 @@ function WriteReviewForm({ slug }: { slug: string }) {
     const [buildingImageUrl, setBuildingImageUrl] = useState("");
     const [reviewImageUrls, setReviewImageUrls] = useState<string[]>([""]);
 
+    const triggerBlueskyReviewPost = async (reviewId: string) => {
+        const controller = new AbortController();
+        const timeout = window.setTimeout(() => controller.abort(), 5000);
+
+        try {
+            const response = await fetch("/api/social/bluesky/review-posted", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ reviewId }),
+                keepalive: true,
+                signal: controller.signal,
+            });
+
+            if (!response.ok) {
+                const payload = await response.json().catch(() => null);
+                console.error("[WriteReview] Bluesky automation failed:", payload?.error || response.statusText);
+            }
+        } catch (error) {
+            console.error("[WriteReview] Bluesky automation failed:", error);
+        } finally {
+            window.clearTimeout(timeout);
+        }
+    };
+
     useEffect(() => {
         async function loadData() {
             // Load apartment info
@@ -207,7 +233,8 @@ function WriteReviewForm({ slug }: { slug: string }) {
                 await updateReview(editReviewId, reviewPayload);
                 toast.success("Review updated successfully!");
             } else {
-                await addReview(reviewPayload);
+                const createdReview = await addReview(reviewPayload);
+                void triggerBlueskyReviewPost(createdReview.id);
                 toast.success("Review submitted! Thank you.");
             }
             router.push(`/apartments/${slug}`);

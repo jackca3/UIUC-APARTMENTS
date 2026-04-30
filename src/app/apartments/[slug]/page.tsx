@@ -185,7 +185,7 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                             {reviews.length > 0 ? (
                                 <div className="space-y-10">
                                     {reviews.map(review => (
-                                        <Card key={review.id} className="rounded-[40px] border-none bg-gray-50/50 p-10 shadow-premium transition-all hover:bg-white border hover:border-gray-100 group">
+                                        <Card id={`review-${review.id}`} key={review.id} className="rounded-[40px] border-none bg-gray-50/50 p-10 shadow-premium transition-all hover:bg-white border hover:border-gray-100 group">
                                             <div className="flex flex-col md:flex-row justify-between gap-8 mb-10">
                                                 <div className="flex items-center gap-5">
                                                     <div className="h-16 w-16 rounded-3xl bg-uiuc-navy flex items-center justify-center text-white font-black text-2xl shadow-xl transition-transform group-hover:rotate-3">
