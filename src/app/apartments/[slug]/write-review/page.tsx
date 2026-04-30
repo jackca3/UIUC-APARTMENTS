@@ -14,7 +14,6 @@ import { ShieldAlert, ImagePlus, X, Building2, Camera, UserSquare2, Star, Send, 
 import Link from "next/link";
 import { addReview, updateReview, getReviewById, getApartmentBySlug } from "@/lib/api";
 import { StarRatingInput } from "@/components/star-rating-input";
-import { trackLaunchEvent } from "@/lib/analytics";
 
 function WriteReviewForm({ slug }: { slug: string }) {
     const { user, is_verified, loading } = useAuth();
@@ -159,19 +158,6 @@ function WriteReviewForm({ slug }: { slug: string }) {
         return () => window.removeEventListener("paste", handlePaste);
     }, [editReviewId, user, loading, router, slug]);
 
-    useEffect(() => {
-        if (loading || !user) return;
-
-        trackLaunchEvent({
-            eventName: "review_form_opened",
-            userId: user.id,
-            apartmentSlug: slug,
-            metadata: {
-                mode: editReviewId ? "edit" : "create",
-            },
-        });
-    }, [editReviewId, loading, slug, user]);
-
     if (loading || fetchingReview) return (
             <div className="container mx-auto px-4 py-32 flex flex-col items-center justify-center space-y-4">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-uiuc-navy" />
@@ -245,46 +231,17 @@ function WriteReviewForm({ slug }: { slug: string }) {
 
             if (editReviewId) {
                 await updateReview(editReviewId, reviewPayload);
-                trackLaunchEvent({
-                    eventName: "review_submit_succeeded",
-                    userId: user.id,
-                    apartmentSlug: slug,
-                    metadata: {
-                        mode: "edit",
-                    },
-                });
                 toast.success("Review updated successfully!");
-                router.push(`/apartments/${slug}?review=updated`);
             } else {
                 const createdReview = await addReview(reviewPayload);
-                trackLaunchEvent({
-                    eventName: "review_submit_succeeded",
-                    userId: user.id,
-                    apartmentSlug: slug,
-                    metadata: {
-                        mode: "create",
-                    },
-                });
                 void triggerBlueskyReviewPost(createdReview.id);
                 toast.success("Review submitted! Thank you.");
-                router.push(`/apartments/${slug}?review=created`);
             }
+            router.push(`/apartments/${slug}`);
         } catch (err) {
             const msg = err instanceof Error ? err.message : String(err);
             console.error('[WriteReview] Submission failed:', msg, err);
-            const friendlyMessage = msg.includes("already reviewed")
-                ? "You already have a review for this apartment. You can edit it from the apartment page instead."
-                : msg;
-            trackLaunchEvent({
-                eventName: "review_submit_failed",
-                userId: user.id,
-                apartmentSlug: slug,
-                metadata: {
-                    mode: editReviewId ? "edit" : "create",
-                    reason: friendlyMessage,
-                },
-            });
-            toast.error(`Submission failed: ${friendlyMessage}`);
+            toast.error(`Submission failed: ${msg}`);
 
         } finally {
             setSubmitting(false);
@@ -309,7 +266,7 @@ function WriteReviewForm({ slug }: { slug: string }) {
 
             <div className="flex flex-col md:flex-row gap-8 items-start">
                 <div className="flex-1 w-full">
-            <h1 className="text-4xl md:text-5xl font-black text-uiuc-navy mb-2 tracking-tighter uppercase leading-none">
+                    <h1 className="text-5xl font-black text-uiuc-navy mb-2 tracking-tighter uppercase leading-none">
                         {editReviewId ? "Edit" : "Post"} a <span className="text-uiuc-orange">Review</span>
                     </h1>
                     <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-10">Review for {apartmentName || slug}</p>
@@ -515,12 +472,12 @@ function WriteReviewForm({ slug }: { slug: string }) {
                         <Button
                             type="submit"
                             disabled={submitting}
-                            className="w-full bg-uiuc-navy text-white h-16 md:h-20 rounded-3xl font-black uppercase text-base md:text-xl tracking-tighter hover:bg-uiuc-navy/90 shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-50"
+                            className="w-full bg-uiuc-navy text-white h-20 rounded-3xl font-black uppercase text-xl tracking-tighter hover:bg-uiuc-navy/90 shadow-xl transition-all hover:-translate-y-1 active:scale-[0.98] disabled:opacity-50"
                         >
                             {submitting ? (
                                 <span className="flex items-center gap-3">
                                     <div className="h-5 w-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
-                                    Saving your verified review...
+                                    Saving...
                                 </span>
                             ) : (
                                 <span className="flex items-center gap-3">
@@ -548,7 +505,7 @@ function WriteReviewForm({ slug }: { slug: string }) {
                             <CheckCircle className="h-4 w-4 text-uiuc-orange" />
                             <h4 className="font-black text-uiuc-navy uppercase tracking-tighter text-sm">Review Guidelines</h4>
                         </div>
-                        <ul className="text-xs text-gray-600 font-bold uppercase tracking-wider space-y-3 leading-loose">
+                        <ul className="text-[11px] text-gray-600 font-bold uppercase tracking-wider space-y-3 leading-loose">
                             <li>• Must be a current/past tenant</li>
                             <li>• No landlord interaction</li>
                             <li>• One review per building</li>

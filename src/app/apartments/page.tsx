@@ -124,9 +124,6 @@ export default function ApartmentsDirectory() {
                         Discover <span className="text-uiuc-orange">Apt.ly</span>
                     </h1>
                     <p className="text-gray-500 font-bold uppercase tracking-widest text-xs">Browse {filtered.length} Residential Buildings near UIUC campus</p>
-                    <p className="mt-3 max-w-2xl text-sm font-medium leading-7 text-gray-500">
-                        Can't find your building yet? Add it once and leave the first verified review so the next student does not have to search in the dark.
-                    </p>
                 </div>
                 <Button asChild className="bg-uiuc-navy hover:bg-black text-white px-8 h-14 rounded-2xl font-black uppercase tracking-widest text-xs shadow-premium transition-all hover:scale-105 active:scale-95">
                     <Link href="/apartments/add-building">

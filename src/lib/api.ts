@@ -6,9 +6,6 @@ import { Apartment, ReviewWithAuthor } from './types';
 const isSupabaseConfigured = () =>
     !!(process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
-const shouldUseMockFallback = () =>
-    process.env.NODE_ENV !== 'production' && !isSupabaseConfigured();
-
 // ── Favorites (localStorage fallback — fine since it's per-user) ──
 const getPersistedFavorites = (): Set<string> => {
     if (typeof window === 'undefined') return new Set();
@@ -51,54 +48,6 @@ export interface NewReviewData {
     monthlyRentPaid?: number | null;
     imageUrls?: string[];
     buildingImageUrl?: string | null;
-}
-
-export interface ReviewPost {
-    id: string;
-    apartment_id: string;
-    apartment_name: string;
-    apartment_slug: string;
-    apartment_address: string;
-    management_company: string | null;
-    user_id: string;
-    author_name: string;
-    is_verified: boolean;
-    management_rating: number;
-    maintenance_rating: number;
-    value_rating: number;
-    noise_rating: number;
-    monthly_rent_paid: number | null;
-    written_review: string;
-    image_urls: string[];
-    created_at: string;
-}
-
-export interface ApartmentLeaderboardEntry {
-    apartment_id: string;
-    apartment_name: string;
-    apartment_slug: string;
-    apartment_address: string;
-    management_company: string | null;
-    image_url: string | null;
-    review_count: number;
-    raw_average_rating: number;
-    leaderboard_score: number;
-    avg_management_rating: number;
-    avg_maintenance_rating: number;
-    avg_value_rating: number;
-    avg_noise_rating: number;
-    avg_monthly_rent_paid: number | null;
-}
-
-export interface UserDashboardReview {
-    id: string;
-    apartment_id: string;
-    apartment_name: string;
-    apartment_slug: string;
-    created_at: string;
-    overall_rating: number;
-    written_review: string;
-    monthly_rent_paid: number | null;
 }
 
 function slugify(str: string): string {
@@ -156,10 +105,8 @@ export async function getApartments(): Promise<Apartment[]> {
     const favorites = getPersistedFavorites();
 
     if (!isSupabaseConfigured()) {
-        if (shouldUseMockFallback()) {
-            return mockApartments.map(apt => ({ ...apt, is_favorited: favorites.has(apt.id) }));
-        }
-        return [];
+        // Fallback: use mock data
+        return mockApartments.map(apt => ({ ...apt, is_favorited: favorites.has(apt.id) }));
     }
 
     const supabase = createClient();
@@ -168,15 +115,9 @@ export async function getApartments(): Promise<Apartment[]> {
         .select('*')
         .order('created_at', { ascending: false });
 
-    if (error) {
-        console.error('Failed to load apartments from Supabase:', error.message);
-        return shouldUseMockFallback()
-            ? mockApartments.map(apt => ({ ...apt, is_favorited: favorites.has(apt.id) }))
-            : [];
-    }
-
-    if (!data?.length) {
-        return [];
+    if (error || !data?.length) {
+        // Supabase returned nothing — fall back to mock
+        return mockApartments.map(apt => ({ ...apt, is_favorited: favorites.has(apt.id) }));
     }
 
     return data.map(row => ({
@@ -192,11 +133,8 @@ export async function getApartmentBySlug(slug: string): Promise<Apartment | null
     const favorites = getPersistedFavorites();
 
     if (!isSupabaseConfigured()) {
-        if (shouldUseMockFallback()) {
-            const apt = mockApartments.find(a => a.slug === slug);
-            return apt ? { ...apt, is_favorited: favorites.has(apt.id) } : null;
-        }
-        return null;
+        const apt = mockApartments.find(a => a.slug === slug);
+        return apt ? { ...apt, is_favorited: favorites.has(apt.id) } : null;
     }
 
     const supabase = createClient();
@@ -207,14 +145,8 @@ export async function getApartmentBySlug(slug: string): Promise<Apartment | null
         .single();
 
     if (error || !data) {
-        if (error) {
-            console.error(`Failed to load apartment ${slug}:`, error.message);
-        }
-        if (shouldUseMockFallback()) {
-            const apt = mockApartments.find(a => a.slug === slug);
-            return apt ? { ...apt, is_favorited: favorites.has(apt.id) } : null;
-        }
-        return null;
+        const apt = mockApartments.find(a => a.slug === slug);
+        return apt ? { ...apt, is_favorited: favorites.has(apt.id) } : null;
     }
 
     return { ...rowToApartment(data), is_favorited: favorites.has(data.id) };
@@ -225,7 +157,7 @@ export async function getApartmentBySlug(slug: string): Promise<Apartment | null
 // ═══════════════════════════════════════════════════════════════════
 export async function getReviewsForApartment(apartmentId: string): Promise<ReviewWithAuthor[]> {
     if (!isSupabaseConfigured()) {
-        return shouldUseMockFallback() ? mockReviews.filter(r => r.apartment_id === apartmentId) : [];
+        return mockReviews.filter(r => r.apartment_id === apartmentId);
     }
 
     const supabase = createClient();
@@ -247,19 +179,13 @@ export async function getReviewsForApartment(apartmentId: string): Promise<Revie
             .order('created_at', { ascending: false });
             
         if (secondError || !secondData) {
-            if (secondError) {
-                console.error(`Failed to load reviews for apartment ${apartmentId}:`, secondError.message);
-            }
-            return shouldUseMockFallback() ? mockReviews.filter(r => r.apartment_id === apartmentId) : [];
+             return mockReviews.filter(r => r.apartment_id === apartmentId);
         }
         return secondData.map(rowToReview);
     }
 
     if (error || !data) {
-        if (error) {
-            console.error(`Failed to load reviews for apartment ${apartmentId}:`, error.message);
-        }
-        return shouldUseMockFallback() ? mockReviews.filter(r => r.apartment_id === apartmentId) : [];
+        return mockReviews.filter(r => r.apartment_id === apartmentId);
     }
 
     return data.map(rowToReview);
@@ -268,177 +194,9 @@ export async function getReviewsForApartment(apartmentId: string): Promise<Revie
 // ═══════════════════════════════════════════════════════════════════
 // GET REVIEW BY ID
 // ═══════════════════════════════════════════════════════════════════
-export async function getRecentReviewPosts(limit = 12): Promise<ReviewPost[]> {
-    if (!isSupabaseConfigured()) {
-        return [];
-    }
-
-    const supabase = createClient();
-    const { data: reviews, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(limit);
-
-    if (error || !reviews?.length) {
-        return [];
-    }
-
-    const realReviews = reviews.filter(review => review.written_review?.trim());
-    if (!realReviews.length) {
-        return [];
-    }
-
-    const apartmentIds = Array.from(new Set(realReviews.map(review => review.apartment_id).filter(Boolean)));
-    const userIds = Array.from(new Set(realReviews.map(review => review.user_id).filter(Boolean)));
-
-    const { data: apartments } = apartmentIds.length
-        ? await supabase
-            .from('apartments')
-            .select('id, name, slug, address, management_company')
-            .in('id', apartmentIds)
-        : { data: [] };
-
-    const { data: profiles } = userIds.length
-        ? await supabase
-            .from('profiles')
-            .select('id, username, first_name, last_name, is_verified')
-            .in('id', userIds)
-        : { data: [] };
-
-    const apartmentsById = new Map((apartments ?? []).map(apartment => [apartment.id, apartment]));
-    const profilesById = new Map((profiles ?? []).map(profile => [profile.id, profile]));
-
-    return realReviews
-        .map(review => {
-            const apartment = apartmentsById.get(review.apartment_id);
-            if (!apartment) return null;
-
-            const profile = profilesById.get(review.user_id);
-            const authorName =
-                profile?.username ||
-                [profile?.first_name, profile?.last_name].filter(Boolean).join(' ') ||
-                'Verified Illini';
-
-            return {
-                id: review.id,
-                apartment_id: review.apartment_id,
-                apartment_name: apartment.name,
-                apartment_slug: apartment.slug,
-                apartment_address: apartment.address,
-                management_company: apartment.management_company ?? null,
-                user_id: review.user_id,
-                author_name: authorName,
-                is_verified: profile?.is_verified ?? true,
-                management_rating: review.management_rating,
-                maintenance_rating: review.maintenance_rating,
-                value_rating: review.value_rating,
-                noise_rating: review.noise_rating,
-                monthly_rent_paid: review.monthly_rent_paid ?? null,
-                written_review: review.written_review,
-                image_urls: review.image_urls ?? [],
-                created_at: review.created_at,
-            } satisfies ReviewPost;
-        })
-        .filter((post): post is ReviewPost => post !== null);
-}
-
-export async function getApartmentLeaderboard(): Promise<ApartmentLeaderboardEntry[]> {
-    if (!isSupabaseConfigured()) {
-        return [];
-    }
-
-    const supabase = createClient();
-    const { data: reviews, error } = await supabase
-        .from('reviews')
-        .select('*');
-
-    if (error || !reviews?.length) {
-        return [];
-    }
-
-    const apartmentIds = Array.from(new Set(reviews.map(review => review.apartment_id).filter(Boolean)));
-    if (!apartmentIds.length) {
-        return [];
-    }
-
-    const { data: apartments } = await supabase
-        .from('apartments')
-        .select('id, name, slug, address, management_company, image_url')
-        .in('id', apartmentIds);
-
-    const apartmentsById = new Map((apartments ?? []).map(apartment => [apartment.id, apartment]));
-
-    const reviewOverallScores = reviews.map(review =>
-        (review.management_rating + review.maintenance_rating + review.value_rating + review.noise_rating) / 4
-    );
-    const globalAverage =
-        reviewOverallScores.reduce((sum, score) => sum + score, 0) / reviewOverallScores.length;
-    const priorWeight = 2;
-
-    const reviewsByApartment = new Map<string, typeof reviews>();
-    for (const review of reviews) {
-        const apartmentReviews = reviewsByApartment.get(review.apartment_id) ?? [];
-        apartmentReviews.push(review);
-        reviewsByApartment.set(review.apartment_id, apartmentReviews);
-    }
-
-    return Array.from(reviewsByApartment.entries())
-        .map(([apartmentId, apartmentReviews]) => {
-            const apartment = apartmentsById.get(apartmentId);
-            if (!apartment || !apartmentReviews.length) return null;
-
-            const reviewCount = apartmentReviews.length;
-            const avgManagement =
-                apartmentReviews.reduce((sum, review) => sum + review.management_rating, 0) / reviewCount;
-            const avgMaintenance =
-                apartmentReviews.reduce((sum, review) => sum + review.maintenance_rating, 0) / reviewCount;
-            const avgValue =
-                apartmentReviews.reduce((sum, review) => sum + review.value_rating, 0) / reviewCount;
-            const avgNoise =
-                apartmentReviews.reduce((sum, review) => sum + review.noise_rating, 0) / reviewCount;
-            const rawAverage = (avgManagement + avgMaintenance + avgValue + avgNoise) / 4;
-
-            const rentReports = apartmentReviews.filter(review => review.monthly_rent_paid !== null);
-            const avgRent = rentReports.length
-                ? rentReports.reduce((sum, review) => sum + Number(review.monthly_rent_paid ?? 0), 0) / rentReports.length
-                : null;
-
-            const leaderboardScore =
-                ((reviewCount * rawAverage) + (priorWeight * globalAverage)) / (reviewCount + priorWeight);
-
-            return {
-                apartment_id: apartment.id,
-                apartment_name: apartment.name,
-                apartment_slug: apartment.slug,
-                apartment_address: apartment.address,
-                management_company: apartment.management_company ?? null,
-                image_url: apartment.image_url ?? null,
-                review_count: reviewCount,
-                raw_average_rating: rawAverage,
-                leaderboard_score: leaderboardScore,
-                avg_management_rating: avgManagement,
-                avg_maintenance_rating: avgMaintenance,
-                avg_value_rating: avgValue,
-                avg_noise_rating: avgNoise,
-                avg_monthly_rent_paid: avgRent,
-            } satisfies ApartmentLeaderboardEntry;
-        })
-        .filter((entry): entry is ApartmentLeaderboardEntry => entry !== null)
-        .sort((a, b) => {
-            if (b.leaderboard_score !== a.leaderboard_score) {
-                return b.leaderboard_score - a.leaderboard_score;
-            }
-            if (b.review_count !== a.review_count) {
-                return b.review_count - a.review_count;
-            }
-            return b.raw_average_rating - a.raw_average_rating;
-        });
-}
-
 export async function getReviewById(reviewId: string): Promise<ReviewWithAuthor | null> {
     if (!isSupabaseConfigured()) {
-        return shouldUseMockFallback() ? (mockReviews.find(r => r.id === reviewId) ?? null) : null;
+        return mockReviews.find(r => r.id === reviewId) ?? null;
     }
 
     const supabase = createClient();
@@ -457,60 +215,12 @@ export async function getReviewById(reviewId: string): Promise<ReviewWithAuthor 
             .select('*')
             .eq('id', reviewId)
             .single();
-        if (secondError || !secondData) {
-            if (secondError) {
-                console.error(`Failed to load review ${reviewId}:`, secondError.message);
-            }
-            return shouldUseMockFallback() ? (mockReviews.find(r => r.id === reviewId) ?? null) : null;
-        }
+        if (secondError || !secondData) return null;
         return rowToReview(secondData);
     }
 
-    if (error || !data) {
-        if (error) {
-            console.error(`Failed to load review ${reviewId}:`, error.message);
-        }
-        return shouldUseMockFallback() ? (mockReviews.find(r => r.id === reviewId) ?? null) : null;
-    }
+    if (error || !data) return null;
     return rowToReview(data);
-}
-
-export async function getApartmentReviewCounts(apartmentIds?: string[]): Promise<Record<string, number>> {
-    if (!isSupabaseConfigured()) {
-        if (!shouldUseMockFallback()) return {};
-
-        const counts: Record<string, number> = {};
-        for (const review of mockReviews) {
-            if (apartmentIds && !apartmentIds.includes(review.apartment_id)) continue;
-            counts[review.apartment_id] = (counts[review.apartment_id] ?? 0) + 1;
-        }
-        return counts;
-    }
-
-    const supabase = createClient();
-    let query = supabase.from('reviews').select('apartment_id');
-    if (apartmentIds?.length) {
-        query = query.in('apartment_id', apartmentIds);
-    }
-
-    const { data, error } = await query;
-    if (error || !data) {
-        if (error) {
-            console.error('Failed to load apartment review counts:', error.message);
-        }
-        return shouldUseMockFallback()
-            ? mockReviews.reduce<Record<string, number>>((counts, review) => {
-                if (apartmentIds && !apartmentIds.includes(review.apartment_id)) return counts;
-                counts[review.apartment_id] = (counts[review.apartment_id] ?? 0) + 1;
-                return counts;
-              }, {})
-            : {};
-    }
-
-    return data.reduce<Record<string, number>>((counts, review) => {
-        counts[review.apartment_id] = (counts[review.apartment_id] ?? 0) + 1;
-        return counts;
-    }, {});
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -534,88 +244,11 @@ export async function getFavorites(): Promise<Apartment[]> {
     return all.filter(apt => favorites.has(apt.id));
 }
 
-export async function getUserDashboardReviews(userId: string): Promise<UserDashboardReview[]> {
-    if (!userId) return [];
-
-    if (!isSupabaseConfigured()) {
-        if (!shouldUseMockFallback()) return [];
-
-        const apartmentsById = new Map(mockApartments.map((apartment) => [apartment.id, apartment]));
-        return mockReviews
-            .filter((review) => review.user_id === userId)
-            .map((review) => {
-                const apartment = apartmentsById.get(review.apartment_id);
-                const overallRating =
-                    (review.management_rating + review.maintenance_rating + review.value_rating + review.noise_rating) / 4;
-
-                return {
-                    id: review.id,
-                    apartment_id: review.apartment_id,
-                    apartment_name: apartment?.name ?? "Apartment",
-                    apartment_slug: apartment?.slug ?? review.apartment_id,
-                    created_at: review.created_at,
-                    overall_rating: overallRating,
-                    written_review: review.written_review,
-                    monthly_rent_paid: review.monthly_rent_paid ?? null,
-                } satisfies UserDashboardReview;
-            })
-            .sort((a, b) => b.created_at.localeCompare(a.created_at));
-    }
-
-    const supabase = createClient();
-    const { data: reviews, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .eq('user_id', userId)
-        .order('created_at', { ascending: false });
-
-    if (error || !reviews?.length) {
-        if (error) {
-            console.error(`Failed to load dashboard reviews for user ${userId}:`, error.message);
-        }
-        return [];
-    }
-
-    const apartmentIds = Array.from(new Set(reviews.map((review) => review.apartment_id).filter(Boolean)));
-    const { data: apartments, error: apartmentsError } = apartmentIds.length
-        ? await supabase
-            .from('apartments')
-            .select('id, name, slug')
-            .in('id', apartmentIds)
-        : { data: [], error: null };
-
-    if (apartmentsError) {
-        console.error(`Failed to load dashboard apartments for user ${userId}:`, apartmentsError.message);
-    }
-
-    const apartmentsById = new Map((apartments ?? []).map((apartment) => [apartment.id, apartment]));
-
-    return reviews.map((review) => {
-        const apartment = apartmentsById.get(review.apartment_id);
-        const overallRating =
-            (review.management_rating + review.maintenance_rating + review.value_rating + review.noise_rating) / 4;
-
-        return {
-            id: review.id,
-            apartment_id: review.apartment_id,
-            apartment_name: apartment?.name ?? "Apartment",
-            apartment_slug: apartment?.slug ?? review.apartment_id,
-            created_at: review.created_at,
-            overall_rating: overallRating,
-            written_review: review.written_review,
-            monthly_rent_paid: review.monthly_rent_paid ?? null,
-        } satisfies UserDashboardReview;
-    });
-}
-
 // ═══════════════════════════════════════════════════════════════════
 // ADD BUILDING
 // ═══════════════════════════════════════════════════════════════════
 export async function addBuilding(data: NewBuildingData): Promise<{ apartment: Apartment; isDuplicate: boolean }> {
     if (!isSupabaseConfigured()) {
-        if (!shouldUseMockFallback()) {
-            throw new Error('Database unavailable. Cannot add buildings until Supabase is configured.');
-        }
         // Fallback — store locally
         const { addBuilding: storeAdd, findByAddress, slugify: storeSlugify } = await import('./store');
         const existing = findByAddress(data.address);
@@ -686,9 +319,6 @@ export async function addReview(data: NewReviewData): Promise<ReviewWithAuthor> 
     const imageUrls         = data.imageUrls?.filter(u => u.trim()) ?? [];
 
     if (!isSupabaseConfigured()) {
-        if (!shouldUseMockFallback()) {
-            throw new Error('Database unavailable. Cannot submit reviews until Supabase is configured.');
-        }
         const { addUserReview, getUserReviews, getUserBuildings, updateBuilding } = await import('./store');
         const { mockApartments: mApts } = await import('./mock-data');
         const apt = getUserBuildings().find(a => a.slug === data.apartmentSlug)
@@ -813,9 +443,6 @@ export async function addReview(data: NewReviewData): Promise<ReviewWithAuthor> 
 // ═══════════════════════════════════════════════════════════════════
 export async function updateReview(reviewId: string, data: NewReviewData): Promise<ReviewWithAuthor | null> {
     if (!isSupabaseConfigured()) {
-        if (!shouldUseMockFallback()) {
-            throw new Error('Database unavailable. Cannot update reviews until Supabase is configured.');
-        }
         const { updateUserReview, getUserReviews } = await import('./store');
         const existing = getUserReviews().find(r => r.id === reviewId);
         if (!existing) return null;
