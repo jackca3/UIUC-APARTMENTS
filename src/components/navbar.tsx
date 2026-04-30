@@ -50,6 +50,18 @@ export default function Navbar() {
                         >
                             Apartments
                         </Link>
+                        <Link
+                            href="/reviews"
+                            className="text-sm font-black uppercase tracking-widest text-uiuc-navy/70 hover:text-uiuc-orange transition-colors"
+                        >
+                            Reviews
+                        </Link>
+                        <Link
+                            href="/content-calendar"
+                            className="text-sm font-black uppercase tracking-widest text-uiuc-navy/70 hover:text-uiuc-orange transition-colors"
+                        >
+                            Content
+                        </Link>
                     </div>
 
                     <div className="h-6 w-px bg-gray-100 mx-2" />
@@ -119,7 +131,15 @@ export default function Navbar() {
 
                 {/* Mobile Navigation */}
                 <div className="md:hidden flex items-center">
-                    <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="md:hidden">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="md:hidden"
+                        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+                        aria-expanded={isOpen}
+                        aria-controls="mobile-navigation"
+                    >
                         <Menu className="h-6 w-6" />
                     </Button>
                 </div>
@@ -127,7 +147,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Dropdown */}
             {isOpen && (
-                <div className="md:hidden border-t p-4 bg-white/95 backdrop-blur absolute w-full shadow-lg z-50">
+                <div id="mobile-navigation" className="md:hidden border-t p-4 bg-white/95 backdrop-blur absolute w-full shadow-lg z-50">
                     <div className="flex flex-col space-y-4">
                         <Link
                             href="/apartments"
@@ -135,6 +155,20 @@ export default function Navbar() {
                             className="text-sm font-black uppercase tracking-widest text-uiuc-navy"
                         >
                             Apartments
+                        </Link>
+                        <Link
+                            href="/reviews"
+                            onClick={() => setIsOpen(false)}
+                            className="text-sm font-black uppercase tracking-widest text-uiuc-navy"
+                        >
+                            Reviews
+                        </Link>
+                        <Link
+                            href="/content-calendar"
+                            onClick={() => setIsOpen(false)}
+                            className="text-sm font-black uppercase tracking-widest text-uiuc-navy"
+                        >
+                            Content
                         </Link>
                         <div className="border-t pt-4">
                             {!loading && (

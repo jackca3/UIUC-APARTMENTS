@@ -12,6 +12,7 @@ import { Building2, Star, Send, ShieldCheck, ArrowLeft, CheckCircle, AlertCircle
 import Link from "next/link";
 import { addBuilding, addReview } from "@/lib/api";
 import { StarRatingInput } from "@/components/star-rating-input";
+import { trackLaunchEvent } from "@/lib/analytics";
 
 
 function AddBuildingForm() {
@@ -105,9 +106,27 @@ function AddBuildingForm() {
                 monthlyRentPaid: form.rent ? Number(form.rent) : null,
             });
 
-            router.push(`/apartments/${apartment.slug}?added=true`);
+            trackLaunchEvent({
+                eventName: "add_building_submit_succeeded",
+                userId: user.id,
+                apartmentId: apartment.id,
+                apartmentSlug: apartment.slug,
+                metadata: {
+                    name: form.name,
+                },
+            });
+            router.push(`/apartments/${apartment.slug}?building=added&review=created`);
         } catch (err) {
-            setError("Something went wrong. Please try again.");
+            const message = err instanceof Error ? err.message : "Something went wrong. Please try again.";
+            trackLaunchEvent({
+                eventName: "add_building_submit_failed",
+                userId: user.id,
+                metadata: {
+                    name: form.name,
+                    reason: message,
+                },
+            });
+            setError(message);
             setLoading(false);
         }
     };
@@ -126,6 +145,9 @@ function AddBuildingForm() {
                         Expand <span className="text-uiuc-orange">Apt.ly</span>
                     </h1>
                     <p className="text-gray-500 font-bold uppercase tracking-widest text-xs mb-10">Add a missing building + leave the first review</p>
+                    <p className="-mt-6 mb-8 max-w-2xl text-sm font-medium leading-7 text-gray-500">
+                        This is the fastest way to fill gaps in the directory: add the building once, then anchor it with a real verified student review right away.
+                    </p>
 
                     {error && (
                         <div className="mb-6 flex items-center gap-3 bg-red-50 border border-red-100 text-red-600 rounded-2xl p-4 font-bold text-sm">

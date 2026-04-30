@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Search, Building, Star, MapPin } from "lucide-react";
 import { useEffect, useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { getApartments } from "@/lib/api";
+import { getApartmentReviewCounts, getApartments } from "@/lib/api";
 import { Apartment } from "@/lib/types";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,6 +16,7 @@ import { ApartmentCard } from "@/components/apartment-card";
 
 export default function Home() {
   const [apartments, setApartments] = useState<Apartment[]>([]);
+  const [reviewCounts, setReviewCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -41,7 +42,9 @@ export default function Home() {
                               !apt.address.toLowerCase().includes('202 e chalmers');
         return hasRealImage && isNotChalmers;
       });
-      setApartments(featured.slice(0, 10)); 
+      const selected = featured.slice(0, 10);
+      setApartments(selected);
+      setReviewCounts(await getApartmentReviewCounts(selected.map((apt) => apt.id)));
       setLoading(false);
     }
     loadData();
@@ -50,7 +53,7 @@ export default function Home() {
   return (
     <div className="flex flex-col flex-1">
       {/* Hero Section */}
-      <section className="bg-uiuc-navy py-24 px-4 text-center text-white relative overflow-hidden">
+      <section className="bg-uiuc-navy px-4 py-16 text-center text-white relative overflow-hidden md:py-24">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center" />
         <div className="container mx-auto relative z-10 flex flex-col md:flex-row items-center gap-12">
           
@@ -58,7 +61,7 @@ export default function Home() {
             <Badge className="bg-uiuc-orange/20 text-uiuc-orange hover:bg-uiuc-orange/30 mb-6 px-4 py-1">
               Verified @illinois.edu students only
             </Badge>
-            <h1 className="text-4xl md:text-7xl font-black tracking-tighter mb-6 leading-[0.9]">
+            <h1 className="text-4xl font-black tracking-tighter mb-6 leading-[0.9] md:text-7xl">
               Find your perfect <br/><span className="text-uiuc-orange underline decoration-[8px] underline-offset-[10px]">apartment.</span>
             </h1>
             <p className="text-xl text-gray-300 mb-10 max-w-xl font-medium leading-relaxed italic">
@@ -86,6 +89,9 @@ export default function Home() {
                   Explore Apartments
                 </Button>
               </form>
+              <p className="text-center text-xs font-black uppercase tracking-[0.22em] text-gray-400">
+                Browse freely. Posting reviews requires a verified @illinois.edu account.
+              </p>
             </div>
           </div>
 
@@ -111,15 +117,28 @@ export default function Home() {
                 <div key={i} className="h-[400px] bg-white animate-pulse rounded-2xl border border-gray-100" />
               ))}
             </div>
-          ) : (
+          ) : apartments.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {apartments.map((apt) => (
                 <ApartmentCard 
                     key={apt.id} 
                     apartment={apt} 
-                    reviewCount={apt.id === 'a1' ? 1 : 0} 
+                    reviewCount={reviewCounts[apt.id] ?? 0}
                 />
               ))}
+            </div>
+          ) : (
+            <div className="rounded-[32px] border-2 border-dashed border-gray-200 bg-white p-10 text-center">
+              <h3 className="text-2xl font-black uppercase tracking-tighter text-uiuc-navy">
+                Featured listings are loading back in
+              </h3>
+              <p className="mt-3 text-sm font-medium leading-7 text-gray-500">
+                We do not show placeholder apartments here. Browse the full directory to explore
+                real buildings already in Apt.ly.
+              </p>
+              <Button asChild className="mt-6 rounded-full bg-uiuc-navy px-8 font-black uppercase tracking-widest text-white hover:bg-uiuc-navy/90">
+                <Link href="/apartments">Browse all apartments</Link>
+              </Button>
             </div>
           )}
         </div>

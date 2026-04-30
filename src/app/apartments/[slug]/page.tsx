@@ -1,18 +1,19 @@
 "use client";
 
-import { useEffect, useState, use } from "react";
+import { useEffect, useMemo, useState, use } from "react";
 import { getApartmentBySlug, getReviewsForApartment, toggleFavorite } from "@/lib/api";
 import { Apartment, ReviewWithAuthor } from "@/lib/types";
 import { StarRating } from "@/components/star-rating";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Building, ShieldCheck, ThumbsUp, MessageSquare, Heart, ExternalLink, Star } from "lucide-react";
+import { MapPin, Building, ShieldCheck, ThumbsUp, MessageSquare, Heart, ExternalLink, Star, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
-import { notFound, useRouter } from "next/navigation";
+import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { getStreetViewUrl, cn } from "@/lib/utils";
 import { useAuth } from "@/contexts/auth-context";
 import { useAuthModal } from "@/contexts/auth-modal-context";
+import { trackLaunchEvent } from "@/lib/analytics";
 
 export default function ApartmentPage({ params }: { params: Promise<{ slug: string }> }) {
     const resolvedParams = use(params);
@@ -23,10 +24,53 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
     const { user } = useAuth();
     const { openAuthModal } = useAuthModal();
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const currentUserReview = user ? reviews.find(r => r.user_id === user.id) : null;
+    const feedbackBanner = useMemo(() => {
+        if (searchParams.get("building") === "added") {
+            return {
+                title: "Building added to Apt.ly",
+                body: "Your apartment is now live in the directory, and your verified review was posted with it.",
+            };
+        }
+
+        if (searchParams.get("review") === "updated") {
+            return {
+                title: "Review updated",
+                body: "Your latest edits are now live for other UIUC students to read.",
+            };
+        }
+
+        if (searchParams.get("review") === "created") {
+            return {
+                title: "Review posted",
+                body: "Your verified apartment review is now part of the Apt.ly record for this building.",
+            };
+        }
+
+        if (searchParams.get("duplicate") === "true") {
+            return {
+                title: "This building was already listed",
+                body: "We redirected you to the existing apartment page so your next step can be leaving or editing a real review.",
+            };
+        }
+
+        return null;
+    }, [searchParams]);
 
     const handleWriteReview = () => {
+        trackLaunchEvent({
+            eventName: "review_cta_clicked",
+            userId: user?.id ?? null,
+            apartmentId: apartment?.id ?? null,
+            apartmentSlug: resolvedParams.slug,
+            metadata: {
+                hasExistingReview: Boolean(currentUserReview),
+                isSignedIn: Boolean(user),
+            },
+        });
+
         if (!user) {
             openAuthModal("Sign in to leave a verified review");
         } else if (currentUserReview) {
@@ -88,6 +132,21 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                     <span>/</span>
                     <span className="text-uiuc-navy">{apartment.name}</span>
                 </div>
+                {feedbackBanner && (
+                    <div className="mt-6 flex items-start gap-4 rounded-[28px] border border-green-200 bg-green-50 px-5 py-4 text-left text-green-900 shadow-sm">
+                        <div className="mt-0.5 rounded-full bg-white p-2 text-green-600">
+                            <CheckCircle2 className="h-5 w-5" />
+                        </div>
+                        <div>
+                            <p className="text-sm font-black uppercase tracking-[0.2em] text-green-700">
+                                {feedbackBanner.title}
+                            </p>
+                            <p className="mt-1 text-sm font-medium leading-6 text-green-900/80">
+                                {feedbackBanner.body}
+                            </p>
+                        </div>
+                    </div>
+                )}
             </div>
 
             <div className="container mx-auto px-4">
@@ -95,14 +154,15 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                 <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
                     <div className="space-y-6 max-w-3xl">
                         <div className="flex items-center gap-6">
-                            <h1 className="text-6xl md:text-8xl font-black text-uiuc-navy tracking-tighter uppercase leading-[0.85]">
+                            <h1 className="text-4xl sm:text-5xl md:text-8xl font-black text-uiuc-navy tracking-tighter uppercase leading-[0.85]">
                                 {apartment.name.split(' ').map((word, i) => (
                                     <span key={i} className="block">{word}</span>
                                 ))}
                             </h1>
                             <button 
                                 onClick={handleToggleFavorite}
-                                className="p-5 rounded-3xl bg-gray-50 hover:bg-white shadow-premium transition-all hover:scale-110 active:scale-95 group/fav"
+                                aria-label={isFavorited ? "Remove apartment from favorites" : "Save apartment to favorites"}
+                                className="p-4 md:p-5 rounded-3xl bg-gray-50 hover:bg-white shadow-premium transition-all hover:scale-110 active:scale-95 group/fav"
                             >
                                 <Heart className={cn(
                                     "h-8 w-8 transition-colors",
@@ -175,11 +235,20 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                             <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 border-b border-gray-100 pb-12">
                                 <div className="space-y-2">
                                     <h2 className="text-4xl font-black text-uiuc-navy uppercase tracking-tighter">Verified Reports</h2>
-                                    <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-[10px]">What students are saying about life here.</p>
+                                    <p className="text-gray-400 font-bold uppercase tracking-[0.2em] text-xs">What students are saying about life here.</p>
+                                    <p className="text-xs font-bold text-gray-500">
+                                        Browsing is open to everyone. Leaving a review requires a verified
+                                        {" "}@illinois.edu student account.
+                                    </p>
                                 </div>
-                                <Button onClick={handleWriteReview} className="bg-uiuc-navy hover:bg-black text-white h-20 px-12 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-transform hover:scale-105 active:scale-95 text-xs">
-                                    {currentUserReview ? "Edit Your Review" : "Write a Review"}
-                                </Button>
+                                <div className="flex flex-col items-start gap-3 md:items-end">
+                                    <Button onClick={handleWriteReview} className="bg-uiuc-navy hover:bg-black text-white h-16 md:h-20 px-8 md:px-12 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-transform hover:scale-105 active:scale-95 text-xs w-full md:w-auto">
+                                        {currentUserReview ? "Edit Your Review" : "Write a Review"}
+                                    </Button>
+                                    <p className="text-xs font-black uppercase tracking-[0.22em] text-gray-400">
+                                        One verified review per student
+                                    </p>
+                                </div>
                             </div>
 
                             {reviews.length > 0 ? (
@@ -260,6 +329,9 @@ export default function ApartmentPage({ params }: { params: Promise<{ slug: stri
                                     </div>
                                     <h3 className="text-4xl font-black text-uiuc-navy mb-4 uppercase tracking-tighter">No reviews yet</h3>
                                     <p className="text-gray-400 font-bold mb-12 max-w-sm mx-auto uppercase tracking-widest text-[10px] leading-relaxed">Apt.ly relies on student honesty. Be the first to share your experience with {apartment.name}.</p>
+                                    <p className="text-xs font-bold text-gray-500 mb-8 max-w-md mx-auto">
+                                        You can browse without logging in. Posting the first review requires a verified @illinois.edu account.
+                                    </p>
                                     <Button onClick={handleWriteReview} className="bg-uiuc-orange hover:bg-uiuc-orange/90 text-white h-20 px-16 rounded-[30px] font-black uppercase tracking-widest shadow-premium transition-all hover:scale-105 active:scale-95 text-xs">
                                         Write the First Review
                                     </Button>
